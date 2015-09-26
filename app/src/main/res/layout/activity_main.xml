@@ -173,6 +173,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Position:"
+                android:id="@+id/position"
+                android:layout_weight=".1"
+                android:textSize="25dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=""
+                android:id="@+id/player_position"
+                android:layout_weight=".1" />
+
+            <Space
+                android:layout_width="75dp"
+                android:layout_height="20px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Goals scored:"
                 android:id="@+id/goals"
                 android:layout_weight=".1"

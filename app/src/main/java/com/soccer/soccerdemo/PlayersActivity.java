@@ -30,6 +30,7 @@ public class PlayersActivity extends ActionBarActivity {
     //spinner drop down for teams
     private Spinner spinner1;
     private Spinner spinner2;
+
     ArrayAdapter<String> adapter; //adapter for spinner
     private ArrayList<String> teams;
 
