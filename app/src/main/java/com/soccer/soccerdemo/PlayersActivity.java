@@ -1,5 +1,6 @@
 package com.soccer.soccerdemo;
 
+import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -31,12 +32,13 @@ public class PlayersActivity extends ActionBarActivity {
     private Spinner spinner1;
     private Spinner spinner2;
 
-    //ArrayAdapter<String> adapter; //adapter for spinner
+    ArrayAdapter<String> adapter; //adapter for spinner
     //private ArrayList<String> teams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Intent intent = getIntent();
         setContentView(R.layout.activity_players);
 
         allTeams = "Teams";
@@ -57,6 +59,14 @@ public class PlayersActivity extends ActionBarActivity {
         spinner1 = (Spinner) findViewById(R.id.spinner_team1);
         spinner2 = (Spinner) findViewById(R.id.spinner_team2);
 
+        //adapter = ArrayAdapter.createFromResource(this, intent.getStringArrayExtra(""),
+                //android.R.layout.simple_spinner_item);
+        /*adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1,
+                android.R.id.text1, intent.getStringArrayListExtra("").toArray(intent.getStringArrayExtra("")));
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
+        //spinner1.setAdapter(adapter); //set adapter to spinner
+        //spinner2.setAdapter(adapter); //set adapter to spinner
         /*
         //Use string array to create ArrayAdapter
         //Create ArrayList to hold elements

@@ -35,21 +35,27 @@ public class MainActivity extends ActionBarActivity {
 
     HashMap<String, Team> teams; //teamName = key;
     ArrayList<String> team_names; //team names
-    ArrayAdapter<String> adapter_teams; //spinner adapter for teams
+    ArrayAdapter<String> adapter_teams; //adapter for team spinner
     Spinner spinner_teams;
+
+    //Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //intent = new Intent(MainActivity.this,PlayersActivity.class);
+
         teams = new HashMap<>();
         spinner_teams = (Spinner) findViewById(R.id.spinner_teams);
         team_names = new ArrayList<>();
-        adapter_teams = new ArrayAdapter<String>(this,
+        team_names.add("Meow");
+        team_names.add("Kittens");
+        adapter_teams = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
-                team_names.toArray(new String[0]));
+                team_names);
         adapter_teams.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_teams.setAdapter(adapter_teams);
 
@@ -76,7 +82,9 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         public void onClick(View v) {
-            startActivity(new Intent(MainActivity.this, PlayersActivity.class));
+            Intent intent = new Intent(MainActivity.this,PlayersActivity.class);
+            //intent.putStringArrayListExtra(team_names);
+            startActivity(intent);
         }
     }
 
@@ -98,14 +106,15 @@ public class MainActivity extends ActionBarActivity {
 
         //create new adapter and add updated elements
         //connect to spinner
-        ArrayAdapter<String> spinnerAdaper =
-                new ArrayAdapter<String>(this,
+        ArrayAdapter<String> spinnerAdapter =
+                new ArrayAdapter<>(this,
                         android.R.layout.simple_spinner_item,
                         android.R.id.text1);
-        spinnerAdaper.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_teams.setAdapter(spinnerAdaper);
-        spinnerAdaper.addAll(team_names);
-        spinnerAdaper.notifyDataSetChanged();
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_teams.setAdapter(spinnerAdapter);
+        spinnerAdapter.addAll(team_names);
+        spinnerAdapter.notifyDataSetChanged();
+        //intent.putStringArrayListExtra("", team_names);
     }
 
     @Override
