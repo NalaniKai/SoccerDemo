@@ -15,7 +15,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="50dp">
+            android:paddingBottom="20dp">
 
             <Spinner
                 android:layout_width="322dp"
@@ -39,7 +39,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="50dp">
+            android:paddingBottom="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -109,7 +109,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="50dp">
+            android:paddingBottom="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -145,7 +145,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="50dp">
+            android:paddingBottom="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -167,7 +167,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="50dp">
+            android:paddingBottom="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -254,7 +254,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="50dp">
+            android:paddingBottom="20dp">
 
             <Button
                 android:layout_width="wrap_content"

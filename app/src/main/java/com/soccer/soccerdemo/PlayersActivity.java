@@ -31,8 +31,8 @@ public class PlayersActivity extends ActionBarActivity {
     private Spinner spinner1;
     private Spinner spinner2;
 
-    ArrayAdapter<String> adapter; //adapter for spinner
-    private ArrayList<String> teams;
+    //ArrayAdapter<String> adapter; //adapter for spinner
+    //private ArrayList<String> teams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,7 @@ public class PlayersActivity extends ActionBarActivity {
         spinner1 = (Spinner) findViewById(R.id.spinner_team1);
         spinner2 = (Spinner) findViewById(R.id.spinner_team2);
 
+        /*
         //Use string array to create ArrayAdapter
         //Create ArrayList to hold elements
         //Connect spinner to adapter
@@ -68,6 +69,7 @@ public class PlayersActivity extends ActionBarActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter);
         spinner2.setAdapter(adapter);
+        */
     }
 
 

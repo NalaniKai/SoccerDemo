@@ -6,13 +6,15 @@ package com.soccer.soccerdemo;
 public class Player {
 
     private String name;
+    private String position;
     private String team;
     private int goals;
     private int red;
     private int yellow;
 
-    public Player(String name, String team, int goals, int red, int yellow) {
+    public Player(String name, String position, String team, int goals, int red, int yellow) {
         this.name = name;
+        this.position = position;
         this.team = team;
         this.goals = goals;
         this.red = red;
@@ -21,6 +23,7 @@ public class Player {
 
     //get player stats
     public String getName() { return  name; }
+    public String getPosition() { return  position; }
     public String getTeamName() { return team; }
     public int getGoalsScored() { return goals; }
     public int getRedCards() { return red; }

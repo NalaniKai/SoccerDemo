@@ -3,6 +3,8 @@ package com.soccer.soccerdemo;
 import android.media.Image;
 import android.widget.ImageView;
 
+import java.util.HashMap;
+
 /**
  * Created by chunm18 on 9/26/2015.
  */
@@ -13,17 +15,18 @@ public class Team {
     private int red_cards;
     private int yellow_cards;
     private String[] positions;
+    HashMap<String, Player> players; //playerName = key
 
     //team name and logo
-    private String name;
+    private String teamName;
     private ImageView logo;
 
-    public Team(int goals, int red_cards, int yellow_cards, String[] positions, String name, ImageView logo) {
+    public Team(int goals, int red_cards, int yellow_cards, String[] positions, String teamName, ImageView logo) {
         this.goals = goals;
         this.red_cards = red_cards;
         this.yellow_cards = yellow_cards;
         this.positions = positions;
-        this.name = name;
+        this.teamName = teamName;
         this.logo = logo;
     }
 
@@ -34,7 +37,7 @@ public class Team {
     public String[] getTeamPositions() { return positions; }
 
     //get team name and logo
-    public String getTeamName() { return name; }
+    public String getTeamName() { return teamName; }
     public ImageView getTeamLogo() { return logo; }
 
     //set team stats
@@ -44,6 +47,6 @@ public class Team {
     public void setTeamPositions(String[] position) { this.positions = position; }
 
     //set team name and logo
-    public void setTeamName(String name) { this.name = name; }
+    public void setTeamName(String teamName) { this.teamName = teamName; }
     public void setTeamLogo(ImageView logo) { this.logo = logo; }
 }
