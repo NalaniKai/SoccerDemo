@@ -46,7 +46,7 @@
             <EditText
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/add_team"
+                android:id="@+id/team_name"
                 android:textSize="25dp" />
 
             <Space
@@ -57,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Add Team"
-                android:id="@+id/team_btn" />
+                android:id="@+id/add_team" />
 
             <Space
                 android:layout_width="30dp"
@@ -75,14 +75,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Add Player: "
+                android:text="Add Player Name: "
                 android:id="@+id/n_add_player"
                 android:textSize="25dp" />
 
             <EditText
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/add_player"
+                android:id="@+id/player_name"
                 android:textSize="25dp" />
 
         </LinearLayout>
@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="0"
-                android:id="@+id/goal_val"
+                android:id="@+id/player_goals"
                 android:layout_weight=".1" />
 
             <Space
@@ -128,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="0"
-                android:id="@+id/red_val"
+                android:id="@+id/player_red"
                 android:layout_weight=".1" />
 
             <Space
@@ -149,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="0"
-                android:id="@+id/yellow_val"
+                android:id="@+id/player_yellow"
                 android:layout_weight=".1" />
         </LinearLayout>
 
@@ -163,7 +163,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Add Player"
-                android:id="@+id/player_btn" />
+                android:id="@+id/add_player" />
         </LinearLayout>
 
         <LinearLayout
@@ -174,8 +174,8 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="List Teams"
-                android:id="@+id/list_teams" />
+                android:text="View Players"
+                android:id="@+id/team_players" />
         </LinearLayout>
 
     </LinearLayout>
