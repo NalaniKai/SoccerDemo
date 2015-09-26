@@ -15,17 +15,17 @@ public class Team {
     private int red_cards;
     private int yellow_cards;
     private String[] positions;
-    HashMap<String, Player> players; //playerName = key
+    //HashMap<String, Player> players; //playerName = key
 
     //team name and logo
     private String teamName;
     private ImageView logo;
 
-    public Team(int goals, int red_cards, int yellow_cards, String[] positions, String teamName, ImageView logo) {
-        this.goals = goals;
-        this.red_cards = red_cards;
-        this.yellow_cards = yellow_cards;
-        this.positions = positions;
+    public Team(String teamName, ImageView logo) {
+        this.goals = 0;
+        this.red_cards = 0;
+        this.yellow_cards = 0;
+        this.positions = null;
         this.teamName = teamName;
         this.logo = logo;
     }
