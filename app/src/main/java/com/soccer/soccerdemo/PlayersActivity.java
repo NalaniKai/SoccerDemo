@@ -1,5 +1,6 @@
 package com.soccer.soccerdemo;
 
+import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -18,6 +20,8 @@ public class PlayersActivity extends ActionBarActivity {
     private String allTeams;
 
     private Button statsBtn;
+    private ImageButton right;
+    private ImageButton left;
 
     //member lists
     private EditText memb1;
@@ -39,6 +43,10 @@ public class PlayersActivity extends ActionBarActivity {
         //button to go back to MainActivity
         statsBtn = (Button) findViewById(R.id.statsButton);
         statsBtn.setOnClickListener(new statsListener());
+
+        //buttons to exchange players between teams
+        right = (ImageButton) findViewById(R.id.arrow_right);
+        left = (ImageButton) findViewById(R.id.arrow_left);
 
         //members list
         memb1 = (EditText) findViewById(R.id.membList1);
