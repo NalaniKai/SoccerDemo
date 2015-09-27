@@ -46,7 +46,7 @@ public class PlayersActivity extends ActionBarActivity {
 
         team_list = new ArrayList<>(); //initialize array list for teams
 
-        players = new HashMap<>();
+        players = new HashMap<>(); //initialize players hashmap
 
         Intent intent = getIntent(); //get intent
 
@@ -89,6 +89,25 @@ public class PlayersActivity extends ActionBarActivity {
         public void onClick(View v) {
             finish();
         } //closes current view and returns to the main view
+
+        /*
+                send data back from activity
+
+        @override
+        onActivityResult(ssdfs) {
+            if(requestCode == 100) {
+                if(resultCode == 1) {
+                    data.getStringExtra("goback");
+                }
+            }
+
+        }
+
+        before finish
+        intent.putExtra("goback", "yay");
+        setResult(1);
+        finish();
+         */
     }
 
     @Override
