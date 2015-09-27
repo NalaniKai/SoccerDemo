@@ -26,6 +26,8 @@ public class MainActivity extends ActionBarActivity {
     Team currentTeam; //current team
     Player currentPlayer; //current player
 
+    String team_selected; //team selected in team spinner
+
     private Button player_view; //btn to change to PlayersActivity
     private Button add_player; //btn to add a new player
     private Button add_team; //btn to add a new team
@@ -34,6 +36,7 @@ public class MainActivity extends ActionBarActivity {
     private EditText player_goals;
     private EditText player_red;
     private EditText player_yellow;
+    private EditText player_position;
     private EditText player_name;
 
     private EditText team_name; //new team name
@@ -70,6 +73,7 @@ public class MainActivity extends ActionBarActivity {
         player_red = (EditText) findViewById(R.id.player_red);
         player_yellow = (EditText) findViewById(R.id.player_yellow);
         player_name = (EditText) findViewById(R.id.player_name);
+        player_position = (EditText) findViewById(R.id.player_position);
 
         //initialize text field for new team and image view for logo
         team_name = (EditText) findViewById(R.id.team_name);
@@ -92,16 +96,19 @@ public class MainActivity extends ActionBarActivity {
         currentPlayer = new Player("Linda", "Defender", "Meow", 1, 1, 1);
         players.put("Linda", currentPlayer);
 
-        //teams to start with
+        //add team names to array list
         team_names.add("Meow");
         team_names.add("Kittens");
 
-        for(int i = 0; i < team_names.size(); i++) {
-            currentTeam = new Team(team_names.get(i), team_logo); //create teams
-        }
+        //start with teams in hashmap
+        currentTeam = new Team("Meow", team_logo);
+        teams.put("Meow", currentTeam);
+        currentTeam = new Team("Kittens", team_logo);
+        teams.put("Kittens", currentTeam);
 
         //set listeners
         add_team.setOnClickListener(new addTeamListener());
+        add_player.setOnClickListener(new addPlayerListener());
         spinner_teams.setOnItemSelectedListener(new teamSelectedListener());
         player_view.setOnClickListener(new playerViewListener());
 
@@ -122,9 +129,9 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            String team = parent.getItemAtPosition(position).toString(); //get selected item
+            team_selected = parent.getItemAtPosition(position).toString(); //get selected item
 
-            displayPositions(team);
+            displayPositions();
         }
 
         @Override
@@ -133,13 +140,34 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    public void displayPositions(String team) {
+    public class addPlayerListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            addPlayer(player_name.getText().toString());
+        }
+    }
+
+    private void addPlayer(String name) {
+        //get player stats from gui
+        currentPlayer = new Player(name,
+                player_position.getText().toString(),
+                team_selected, Integer.parseInt(player_goals.getText().toString()),
+                Integer.parseInt(player_red.getText().toString()),
+                Integer.parseInt(player_yellow.getText().toString()));
+
+        players.put( name, currentPlayer); //add new player
+
+        displayPositions(); //update positions in a team
+    }
+
+    public void displayPositions() {
         team_positions = new ArrayList<>(); //initialize team positions
 
         Set<String> keys = players.keySet(); //get all keys for players
 
         for(String k: keys) {
-            if(players.get(k).getTeamName().equals(team)) {
+            if(players.get(k).getTeamName().equals(team_selected)) {
                 team_positions.add(players.get(k).getPosition()); //get all positions
             }
         }
@@ -188,6 +216,11 @@ public class MainActivity extends ActionBarActivity {
         spinner_teams.setAdapter(spinnerAdapter);
         spinnerAdapter.addAll(team_names);
         spinnerAdapter.notifyDataSetChanged();
+
+        currentTeam = new Team(teamName, team_logo); //create new team
+
+        teams.put(teamName, currentTeam); //add team to hashmap
+
         //intent.putStringArrayListExtra("", team_names);
     }
 
