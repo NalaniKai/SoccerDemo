@@ -31,6 +31,7 @@ public class MainActivity extends ActionBarActivity {
     private Button player_view; //btn to change to PlayersActivity
     private Button add_player; //btn to add a new player
     private Button add_team; //btn to add a new team
+    private Button start_game; //btn to change to FieldActivity
 
     //player stats when adding a new player
     private EditText player_goals;
@@ -56,17 +57,21 @@ public class MainActivity extends ActionBarActivity {
 
     //Intent intent;
 
+    //PlayersActivity pa;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //pa = new PlayersActivity(MainActivity.this);
         //intent = new Intent(MainActivity.this,PlayersActivity.class);
 
         //initialize buttons and connect to view
         player_view = (Button) findViewById(R.id.team_players);
         add_player = (Button) findViewById(R.id.add_player);
         add_team = (Button) findViewById(R.id.add_team);
+        start_game = (Button) findViewById(R.id.start_game);
 
         //initialize text fields for new players and connect to view
         player_goals = (EditText) findViewById(R.id.player_goals);
@@ -111,6 +116,7 @@ public class MainActivity extends ActionBarActivity {
         add_player.setOnClickListener(new addPlayerListener());
         spinner_teams.setOnItemSelectedListener(new teamSelectedListener());
         player_view.setOnClickListener(new playerViewListener());
+        start_game.setOnClickListener(new gameListener());
 
         adapter_teams = new ArrayAdapter<>(this,    //initialize adapter for teams
                 android.R.layout.simple_list_item_1,
@@ -131,12 +137,21 @@ public class MainActivity extends ActionBarActivity {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             team_selected = parent.getItemAtPosition(position).toString(); //get selected item
 
-            displayPositions();
+            displayPositions(); //update team positions in position spinner
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
 
+        }
+    }
+
+    public class gameListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(MainActivity.this, FieldActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -186,6 +201,12 @@ public class MainActivity extends ActionBarActivity {
         public void onClick(View v) {
             Intent intent = new Intent(MainActivity.this,PlayersActivity.class);
             //intent.putStringArrayListExtra(team_names);
+            //intent.putStringArrayListExtra( "hi", team_names);
+            //intent.putExtra("hi", team_names.toArray());
+            intent.putExtra("myStr", "hi");
+            /*for(int i = 0; i < team_names.size(); i++){
+                intent.putExtra("hi", team_names.get(i));
+            }*/
             startActivity(intent);
         }
     }

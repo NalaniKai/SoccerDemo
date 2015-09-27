@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,11 +15,10 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 
 public class PlayersActivity extends ActionBarActivity {
-
-    private String allTeams;
 
     private Button statsBtn;
     private ImageButton right;
@@ -33,15 +33,58 @@ public class PlayersActivity extends ActionBarActivity {
     private Spinner spinner2;
 
     ArrayAdapter<String> adapter; //adapter for spinner
-    //private ArrayList<String> teams;
+    ArrayList<String> team_list;
+
+
+    /*MainActivity main;
+
+    public PlayersActivity(MainActivity m) {
+        main = m;
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Intent intent = getIntent();
         setContentView(R.layout.activity_players);
 
-        allTeams = "Teams";
+        //Bundle extras = getIntent().getExtras();
+
+        //teams spinners
+        spinner1 = (Spinner) findViewById(R.id.spinner_team1);
+        spinner2 = (Spinner) findViewById(R.id.spinner_team2);
+
+        /*//Intent intent = getIntent();
+
+        if(null != extras) {
+            //h = intent.getStringArrayExtra("hi");
+
+            //team_list.add(extras.getString("myStr"));
+            /*for(int i = 0; i < intent.getStringArrayExtra("hi").length; i++ ) {
+                h[i] = intent.getStringArrayExtra("hi").clone();
+            }
+            for(int i = 0; i< intent.getStringArrayListExtra("hi").size(); i++)
+            {
+                team_list.add(intent.getStringArrayListExtra("hi").get(i));
+            }
+        }*/
+
+        /*adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1,
+                android.R.id.text1,
+                team_list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner1.setAdapter(adapter);*/
+        /*for(int i = 0; i < h.length; i++) {
+            h[i];
+        }*/
+
+        /*adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1,
+                android.R.id.text1,
+                h);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner1.setAdapter(adapter);*/
+        //spinner2.setAdapter(adapter);
 
         //button to go back to MainActivity
         statsBtn = (Button) findViewById(R.id.statsButton);
@@ -55,31 +98,15 @@ public class PlayersActivity extends ActionBarActivity {
         memb1 = (EditText) findViewById(R.id.membList1);
         memb2 = (EditText) findViewById(R.id.membList2);
 
-        //teams spinners
-        spinner1 = (Spinner) findViewById(R.id.spinner_team1);
-        spinner2 = (Spinner) findViewById(R.id.spinner_team2);
 
-        //adapter = ArrayAdapter.createFromResource(this, intent.getStringArrayExtra(""),
-                //android.R.layout.simple_spinner_item);
+
         /*adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,
-                android.R.id.text1, intent.getStringArrayListExtra("").toArray(intent.getStringArrayExtra("")));
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
-        //spinner1.setAdapter(adapter); //set adapter to spinner
-        //spinner2.setAdapter(adapter); //set adapter to spinner
-        /*
-        //Use string array to create ArrayAdapter
-        //Create ArrayList to hold elements
-        //Connect spinner to adapter
-        teams = new ArrayList<>();
-        teams.add(allTeams);
-        adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,
-                android.R.id.text1, teams.toArray(new String[0]));
+                android.R.id.text1,
+                team_list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter);
-        spinner2.setAdapter(adapter);
-        */
+        spinner2.setAdapter(adapter);*/
     }
 
 
