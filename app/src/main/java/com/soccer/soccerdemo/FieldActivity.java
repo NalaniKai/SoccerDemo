@@ -16,7 +16,7 @@ import java.util.Random;
 
 public class FieldActivity extends ActionBarActivity {
 
-    //buttons
+    //buttons to return to the main activity and play the game
     private Button stats;
     private Button play;
 
@@ -24,23 +24,26 @@ public class FieldActivity extends ActionBarActivity {
     private Spinner team1;
     private Spinner team2;
 
-    //arrayList of teams
-    private ArrayList<String> team_list;
+    //spinners for players
+    private Spinner players1;
+    private Spinner players2;
 
-    //array adapter for teams
-    private ArrayAdapter<String> adapter;
+    //arrayList of teams and players
+    private ArrayList<String> team_list;
+    private ArrayList<String> player_list;
+
+    //array adapter for teams and players
+    private ArrayAdapter<String> adapter_teams;
+    private ArrayAdapter<String> adapter_players;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_field);
 
-        //initialize array list for teams
+        //initialize array list for teams and players
         team_list = new ArrayList<>();
-
-        Intent intent = getIntent(); //get intent
-
-        team_list = intent.getStringArrayListExtra("hi"); //get team name array list
+        player_list = new ArrayList<>();
 
         //initialize button to go back to stats page
         stats = (Button) findViewById(R.id.return_stats);
@@ -52,33 +55,56 @@ public class FieldActivity extends ActionBarActivity {
         team1 = (Spinner) findViewById(R.id.spinner_team1);
         team2 = (Spinner) findViewById(R.id.spinner_team2);
 
+        //initialize spinners for players
+        players1 = (Spinner) findViewById(R.id.spinner_players1);
+        players2 = (Spinner) findViewById(R.id.spinner_players2);
+
+        Intent intent = getIntent(); //get intent
+
+        team_list = intent.getStringArrayListExtra("teams"); //get team name array list
+
         //set adapter and connect to team spinners
-        adapter = new ArrayAdapter<>(this,
+        adapter_teams = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
                 team_list);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        team1.setAdapter(adapter);
-        team2.setAdapter(adapter);
+        adapter_teams.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        team1.setAdapter(adapter_teams);
+        team2.setAdapter(adapter_teams);
+
+        //set adapter and connect to player spinners
+        adapter_players = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1,
+                android.R.id.text1,
+                player_list);
+        adapter_players.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        players1.setAdapter(adapter_players);
+        players2.setAdapter(adapter_players);
 
         //set on click listeners for buttons
         stats.setOnClickListener(new returnToStatsListener());
         play.setOnClickListener(new playListener());
     }
 
+    /*
+     * class: playListener      Listens for when user clicks the play button.
+     */
     public class playListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            int winner = (int) (Math.random()*2.0);
+            int winner = (int) (Math.random()*2.0); //chooses random winner
         }
     }
 
+    /*
+     * class: returnToStatsListener         Returns to MainActivity when user clicks stats button.
+     */
     public class returnToStatsListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            finish();
+            finish(); //closes current view
         }
     }
 

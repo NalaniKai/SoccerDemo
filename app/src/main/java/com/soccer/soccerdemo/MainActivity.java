@@ -26,69 +26,62 @@ public class MainActivity extends ActionBarActivity {
     Team currentTeam; //current team
     Player currentPlayer; //current player
 
-    String team_selected; //team selected in team spinner
+    String teamSelected; //team selected in team spinner
 
-    private Button player_view; //btn to change to PlayersActivity
-    private Button add_player; //btn to add a new player
-    private Button add_team; //btn to add a new team
-    private Button start_game; //btn to change to FieldActivity
+    private Button playerView; //btn to change to PlayersActivity
+    private Button addPlayer; //btn to add a new player
+    private Button addTeam; //btn to add a new team
+    private Button startGame; //btn to change to FieldActivity
 
     //player stats when adding a new player
-    private EditText player_goals;
-    private EditText player_red;
-    private EditText player_yellow;
-    private EditText player_position;
-    private EditText player_name;
+    private EditText playerGoals;
+    private EditText playerRed;
+    private EditText playerYellow;
+    private EditText playerPosition;
+    private EditText playerName;
 
-    private EditText team_name; //new team name
+    private EditText teamName; //new team name
 
-    private ImageView team_logo; //team logo
+    private ImageView teamLogo; //team logo
 
     HashMap<String, Player> players; //stores players
 
     HashMap<String, Team> teams; //teamName = key; stores teams
-    ArrayList<String> team_names; //team names
-    ArrayAdapter<String> adapter_teams; //adapter for team spinner
-    Spinner spinner_teams; //spinner to display teams
+    ArrayList<String> teamNames; //team names
+    ArrayAdapter<String> adapterTeams; //adapter for team spinner
+    Spinner spinnerTeams; //spinner to display teams
 
-    Spinner spinner_positions; //spinner to display soccer positions
-    ArrayAdapter<String> adapter_positions; //adapter for player positions
-    ArrayList<String> team_positions; //positions of players in a team
-
-    //Intent intent;
-
-    //PlayersActivity pa;
+    Spinner spinnerPositions; //spinner to display soccer positions
+    ArrayAdapter<String> adapterPositions; //adapter for player positions
+    ArrayList<String> teamPositions; //positions of players in a team
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //pa = new PlayersActivity(MainActivity.this);
-        //intent = new Intent(MainActivity.this,PlayersActivity.class);
-
         //initialize buttons and connect to view
-        player_view = (Button) findViewById(R.id.team_players);
-        add_player = (Button) findViewById(R.id.add_player);
-        add_team = (Button) findViewById(R.id.add_team);
-        start_game = (Button) findViewById(R.id.start_game);
+        playerView = (Button) findViewById(R.id.team_players);
+        addPlayer = (Button) findViewById(R.id.add_player);
+        addTeam = (Button) findViewById(R.id.add_team);
+        startGame = (Button) findViewById(R.id.start_game);
 
         //initialize text fields for new players and connect to view
-        player_goals = (EditText) findViewById(R.id.player_goals);
-        player_red = (EditText) findViewById(R.id.player_red);
-        player_yellow = (EditText) findViewById(R.id.player_yellow);
-        player_name = (EditText) findViewById(R.id.player_name);
-        player_position = (EditText) findViewById(R.id.player_position);
+        playerGoals = (EditText) findViewById(R.id.player_goals);
+        playerRed = (EditText) findViewById(R.id.player_red);
+        playerYellow = (EditText) findViewById(R.id.player_yellow);
+        playerName = (EditText) findViewById(R.id.player_name);
+        playerPosition = (EditText) findViewById(R.id.player_position);
 
         //initialize text field for new team and image view for logo
-        team_name = (EditText) findViewById(R.id.team_name);
-        team_logo = (ImageView) findViewById(R.id.team_logo);
+        teamName = (EditText) findViewById(R.id.team_name);
+        teamLogo = (ImageView) findViewById(R.id.team_logo);
 
         //initialize spinners for teams and positions
-        spinner_teams = (Spinner) findViewById(R.id.spinner_teams);
-        spinner_positions = (Spinner) findViewById(R.id.spinner_positions);
+        spinnerTeams = (Spinner) findViewById(R.id.spinner_teams);
+        spinnerPositions = (Spinner) findViewById(R.id.spinner_positions);
 
-        team_names = new ArrayList<>(); //initialize team names
+        teamNames = new ArrayList<>(); //initialize team names
 
         teams = new HashMap<>(); //initialize teams hashmap
         players = new HashMap<>(); //initialize player hashmap
@@ -102,30 +95,30 @@ public class MainActivity extends ActionBarActivity {
         players.put("Linda", currentPlayer);
 
         //add team names to array list
-        team_names.add("Meow");
-        team_names.add("Kittens");
+        teamNames.add("Meow");
+        teamNames.add("Kittens");
 
         //start with teams in hashmap
-        currentTeam = new Team("Meow", team_logo);
+        currentTeam = new Team("Meow", teamLogo);
         teams.put("Meow", currentTeam);
-        currentTeam = new Team("Kittens", team_logo);
+        currentTeam = new Team("Kittens", teamLogo);
         teams.put("Kittens", currentTeam);
 
         //set listeners
-        add_team.setOnClickListener(new addTeamListener());
-        add_player.setOnClickListener(new addPlayerListener());
-        spinner_teams.setOnItemSelectedListener(new teamSelectedListener());
-        player_view.setOnClickListener(new playerViewListener());
-        start_game.setOnClickListener(new gameListener());
+        addTeam.setOnClickListener(new addTeamListener());
+        addPlayer.setOnClickListener(new addPlayerListener());
+        spinnerTeams.setOnItemSelectedListener(new teamSelectedListener());
+        playerView.setOnClickListener(new playerViewListener());
+        startGame.setOnClickListener(new gameListener());
 
-        adapter_teams = new ArrayAdapter<>(this,    //initialize adapter for teams
+        adapterTeams = new ArrayAdapter<>(this,    //initialize adapter for teams
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
-                team_names);
+                teamNames);
 
         //connect team adapter to team spinner
-        adapter_teams.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_teams.setAdapter(adapter_teams);
+        adapterTeams.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerTeams.setAdapter(adapterTeams);
     }
 
     /*
@@ -135,7 +128,7 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            team_selected = parent.getItemAtPosition(position).toString(); //get selected item
+            teamSelected = parent.getItemAtPosition(position).toString(); //get selected item
 
             displayPositions(); //update team positions in position spinner
         }
@@ -146,108 +139,122 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    /*
+     * class: gameListener      Listens for start game button press. Passes team names
+     *                          and players with intent.
+     */
     public class gameListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(MainActivity.this, FieldActivity.class);
 
-            /*int i;
-            for(i = 0; i < team_names.size(); i++){
-                intent.putExtra("hi" + i, team_names.get(i).toString());
-            }
+            intent.putStringArrayListExtra("teams", teamNames); //add team names to intent
 
-            intent.putExtra("hello", team_names.size());*/
-
-            intent.putStringArrayListExtra("hi", team_names);
-
-            startActivity(intent);
+            startActivity(intent); //change to field activity view
         }
     }
 
+    /*
+     * class: addPlayerListener         Adds a player to the player hashmap when user
+     *                                  clicks add player button.
+     */
     public class addPlayerListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            addPlayer(player_name.getText().toString());
+            addPlayer(playerName.getText().toString()); //call method to add player
         }
     }
 
+    /*
+     *  method: addPlayer       Adds player to player hashmap and updates positions for teams.
+     */
     private void addPlayer(String name) {
-        //get player stats from gui
-        currentPlayer = new Player(name,
-                player_position.getText().toString(),
-                team_selected, Integer.parseInt(player_goals.getText().toString()),
-                Integer.parseInt(player_red.getText().toString()),
-                Integer.parseInt(player_yellow.getText().toString()));
+        currentPlayer = new Player(name,                //get player stats from gui
+                playerPosition.getText().toString(),
+                teamSelected, Integer.parseInt(playerGoals.getText().toString()),
+                Integer.parseInt(playerRed.getText().toString()),
+                Integer.parseInt(playerYellow.getText().toString()));
 
         players.put( name, currentPlayer); //add new player
 
         displayPositions(); //update positions in a team
     }
 
+    /*
+     * method: displayPositions             Displays positions players play in a team.
+     */
     public void displayPositions() {
-        team_positions = new ArrayList<>(); //initialize team positions
+        teamPositions = new ArrayList<>(); //initialize team positions
 
         Set<String> keys = players.keySet(); //get all keys for players
 
         for(String k: keys) {
-            if(players.get(k).getTeamName().equals(team_selected)) {
-                team_positions.add(players.get(k).getPosition()); //get all positions
+            if(players.get(k).getTeamName().equals(teamSelected)) {
+                teamPositions.add(players.get(k).getPosition()); //get all positions
             }
         }
 
-        adapter_positions = new ArrayAdapter<>(this, //initialize adapter for positions
+        adapterPositions = new ArrayAdapter<>(this, //initialize adapter for positions
                 android.R.layout.simple_list_item_1,
-                android.R.id.text1, team_positions);
+                android.R.id.text1, teamPositions);
 
-        adapter_positions.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_positions.setAdapter(adapter_positions);
+        //connect adapter to spinner
+        adapterPositions.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerPositions.setAdapter(adapterPositions);
     }
 
+    /*
+     * class: playerViewListener            Changes view to PlayerActivity when user clicks
+     *                                      the view players button.
+     */
     public class playerViewListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(MainActivity.this,PlayersActivity.class);
+            Intent intent = new Intent(MainActivity.this,PlayersActivity.class); //create intent
 
-            intent.putStringArrayListExtra("hi", team_names);
-            startActivity(intent);
+            intent.putStringArrayListExtra("hi", teamNames); //put team names into intent
+            startActivity(intent); //change to PlayerActivity view
         }
     }
 
+    /*
+     * class: addTeamListener           Listens for when user clicks
+     *                                  add team button.
+     */
     public class addTeamListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            addTeam(team_name.getText().toString());
+            addTeam(teamName.getText().toString()); //calls method to add team
         }
     }
 
+    /*
+     * method: addTeam              Adds team to hashmap for teams.
+     *                              Does not add teams with the same names.
+     */
     private void addTeam(String teamName) {
-        //don't do anything if team already exists
-        if(team_names.indexOf(teamName) >= 0) return;
+        if(teamNames.indexOf(teamName) >= 0) return; //don't do anything if team already exists
 
         //add team name and resort
-        team_names.add((teamName));
-        Collections.sort(team_names);
+        teamNames.add((teamName));
+        Collections.sort(teamNames);
 
         //create new adapter and add updated elements
         //connect to spinner
-        ArrayAdapter<String> spinnerAdapter =
-                new ArrayAdapter<>(this,
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this,
                         android.R.layout.simple_spinner_item,
                         android.R.id.text1);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_teams.setAdapter(spinnerAdapter);
-        spinnerAdapter.addAll(team_names);
+        spinnerTeams.setAdapter(spinnerAdapter);
+        spinnerAdapter.addAll(teamNames);
         spinnerAdapter.notifyDataSetChanged();
 
-        currentTeam = new Team(teamName, team_logo); //create new team
-
+        currentTeam = new Team(teamName, teamLogo); //create new team
         teams.put(teamName, currentTeam); //add team to hashmap
-
-        //intent.putStringArrayListExtra("", team_names);
     }
 
     @Override

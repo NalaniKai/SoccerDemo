@@ -32,7 +32,7 @@
 
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="wrap_content"
+                android:layout_width="175dp"
                 android:layout_height="wrap_content">
 
                 <TextView
@@ -44,17 +44,18 @@
                     android:textSize="25dp"
                     android:paddingBottom="0dp" />
 
-                <EditText
-                    android:layout_width="wrap_content"
+                <Spinner
+                    android:layout_width="198dp"
                     android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
-                    android:ems="10"
-                    android:id="@+id/membList1"
-                    android:paddingBottom="0dp" />
+                    android:id="@+id/spinner_players1" />
+
+                <Space
+                    android:layout_width="25dp"
+                    android:layout_height="20px" />
             </LinearLayout>
 
             <Space
-                android:layout_width="40dp"
+                android:layout_width="20dp"
                 android:layout_height="wrap_content" />
 
             <LinearLayout
@@ -82,14 +83,14 @@
                     android:textSize="25dp"
                     android:paddingBottom="0dp" />
 
-                <EditText
-                    android:layout_width="wrap_content"
+                <Spinner
+                    android:layout_width="145dp"
                     android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
-                    android:ems="10"
-                    android:id="@+id/membList2"
-                    android:paddingBottom="0dp"
-                    android:phoneNumber="true" />
+                    android:id="@+id/spinner_players2" />
+
+                <Space
+                    android:layout_width="25dp"
+                    android:layout_height="20px" />
             </LinearLayout>
 
             <Spinner

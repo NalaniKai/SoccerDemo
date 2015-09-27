@@ -20,6 +20,7 @@ import java.util.Set;
 
 public class PlayersActivity extends ActionBarActivity {
 
+    //buttons
     private Button statsBtn;
     private ImageButton right;
     private ImageButton left;
@@ -32,28 +33,28 @@ public class PlayersActivity extends ActionBarActivity {
     private Spinner spinner1;
     private Spinner spinner2;
 
-    ArrayAdapter<String> adapter; //adapter for spinner
-    ArrayList<String> team_list;
+    ArrayAdapter<String> adapter; //adapter for team spinners
+    ArrayList<String> team_list; //holds team names
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_players);
 
-        //initialize array list for teams
-        team_list = new ArrayList<>();
+        team_list = new ArrayList<>(); //initialize array list for teams
 
         Intent intent = getIntent(); //get intent
 
         team_list = intent.getStringArrayListExtra("hi"); //get array list of team names
 
-        //teams spinners
+        //initialize team spinners
         spinner1 = (Spinner) findViewById(R.id.spinner_team1);
         spinner2 = (Spinner) findViewById(R.id.spinner_team2);
 
-        //button to go back to MainActivity
+        //initialize button to go back to MainActivity
         statsBtn = (Button) findViewById(R.id.statsButton);
-        statsBtn.setOnClickListener(new statsListener());
+
+        statsBtn.setOnClickListener(new statsListener()); //set listener
 
         //buttons to exchange players between teams
         right = (ImageButton) findViewById(R.id.arrow_right);
@@ -63,6 +64,7 @@ public class PlayersActivity extends ActionBarActivity {
         memb1 = (EditText) findViewById(R.id.membList1);
         memb2 = (EditText) findViewById(R.id.membList2);
 
+        //initialize adapter with list of team names and connect to spinners
         adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
@@ -72,13 +74,15 @@ public class PlayersActivity extends ActionBarActivity {
         spinner2.setAdapter(adapter);
     }
 
-
+    /*
+     *  class: statsListener            Goes back to MainActivity view and closes out of current view.
+     */
     private class statsListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
             finish();
-        }
+        } //closes current view and returns to the main view
     }
 
     @Override
