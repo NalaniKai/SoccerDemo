@@ -151,6 +151,16 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(MainActivity.this, FieldActivity.class);
+
+            /*int i;
+            for(i = 0; i < team_names.size(); i++){
+                intent.putExtra("hi" + i, team_names.get(i).toString());
+            }
+
+            intent.putExtra("hello", team_names.size());*/
+
+            intent.putStringArrayListExtra("hi", team_names);
+
             startActivity(intent);
         }
     }
@@ -200,13 +210,8 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(MainActivity.this,PlayersActivity.class);
-            //intent.putStringArrayListExtra(team_names);
-            //intent.putStringArrayListExtra( "hi", team_names);
-            //intent.putExtra("hi", team_names.toArray());
-            intent.putExtra("myStr", "hi");
-            /*for(int i = 0; i < team_names.size(); i++){
-                intent.putExtra("hi", team_names.get(i));
-            }*/
+
+            intent.putStringArrayListExtra("hi", team_names);
             startActivity(intent);
         }
     }

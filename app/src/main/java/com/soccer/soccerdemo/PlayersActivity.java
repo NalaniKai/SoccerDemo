@@ -35,56 +35,21 @@ public class PlayersActivity extends ActionBarActivity {
     ArrayAdapter<String> adapter; //adapter for spinner
     ArrayList<String> team_list;
 
-
-    /*MainActivity main;
-
-    public PlayersActivity(MainActivity m) {
-        main = m;
-    }*/
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_players);
 
-        //Bundle extras = getIntent().getExtras();
+        //initialize array list for teams
+        team_list = new ArrayList<>();
+
+        Intent intent = getIntent(); //get intent
+
+        team_list = intent.getStringArrayListExtra("hi"); //get array list of team names
 
         //teams spinners
         spinner1 = (Spinner) findViewById(R.id.spinner_team1);
         spinner2 = (Spinner) findViewById(R.id.spinner_team2);
-
-        /*//Intent intent = getIntent();
-
-        if(null != extras) {
-            //h = intent.getStringArrayExtra("hi");
-
-            //team_list.add(extras.getString("myStr"));
-            /*for(int i = 0; i < intent.getStringArrayExtra("hi").length; i++ ) {
-                h[i] = intent.getStringArrayExtra("hi").clone();
-            }
-            for(int i = 0; i< intent.getStringArrayListExtra("hi").size(); i++)
-            {
-                team_list.add(intent.getStringArrayListExtra("hi").get(i));
-            }
-        }*/
-
-        /*adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1,
-                android.R.id.text1,
-                team_list);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner1.setAdapter(adapter);*/
-        /*for(int i = 0; i < h.length; i++) {
-            h[i];
-        }*/
-
-        /*adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1,
-                android.R.id.text1,
-                h);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner1.setAdapter(adapter);*/
-        //spinner2.setAdapter(adapter);
 
         //button to go back to MainActivity
         statsBtn = (Button) findViewById(R.id.statsButton);
@@ -98,15 +63,13 @@ public class PlayersActivity extends ActionBarActivity {
         memb1 = (EditText) findViewById(R.id.membList1);
         memb2 = (EditText) findViewById(R.id.membList2);
 
-
-
-        /*adapter = new ArrayAdapter<>(this,
+        adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
                 team_list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter);
-        spinner2.setAdapter(adapter);*/
+        spinner2.setAdapter(adapter);
     }
 
 
