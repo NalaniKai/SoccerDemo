@@ -7,19 +7,36 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.Random;
+
 
 public class FieldActivity extends ActionBarActivity {
 
     private Button stats;
+    private Button play;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_field);
 
+        //initialize button to go back to stats page
         stats = (Button) findViewById(R.id.return_stats);
 
+        //initialize button to play game
+        play = (Button) findViewById(R.id.play);
+
+        //set on click listeners for buttons
         stats.setOnClickListener(new returnToStatsListener());
+        play.setOnClickListener(new playListener());
+    }
+
+    public class playListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            int winner = (int) (Math.random()*2.0);
+        }
     }
 
     public class returnToStatsListener implements View.OnClickListener {
