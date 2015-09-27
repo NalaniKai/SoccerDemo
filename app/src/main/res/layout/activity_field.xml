@@ -17,7 +17,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="false">
+            android:layout_alignParentEnd="false"
+            android:paddingBottom="30dp">
 
             <Spinner
                 android:layout_width="wrap_content"
@@ -32,7 +33,7 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -40,14 +41,16 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Members:"
                     android:id="@+id/members1"
-                    android:textSize="25dp" />
+                    android:textSize="25dp"
+                    android:paddingBottom="0dp" />
 
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
                     android:ems="10"
-                    android:id="@+id/membList1" />
+                    android:id="@+id/membList1"
+                    android:paddingBottom="0dp" />
             </LinearLayout>
 
             <Space
@@ -68,7 +71,7 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -76,14 +79,17 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Members:"
                     android:id="@+id/members2"
-                    android:textSize="25dp" />
+                    android:textSize="25dp"
+                    android:paddingBottom="0dp" />
 
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
                     android:ems="10"
-                    android:id="@+id/membList2" />
+                    android:id="@+id/membList2"
+                    android:paddingBottom="0dp"
+                    android:phoneNumber="true" />
             </LinearLayout>
 
             <Spinner
@@ -97,7 +103,8 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp">
 
             <Button
                 android:layout_width="wrap_content"
@@ -119,7 +126,14 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></LinearLayout>
+            android:layout_height="449dp">
+
+            <com.soccer.soccerdemo.SoccerField
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/surfaceView"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>
