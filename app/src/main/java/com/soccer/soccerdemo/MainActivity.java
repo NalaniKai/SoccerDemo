@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,6 +41,11 @@ public class MainActivity extends ActionBarActivity {
     private EditText playerPosition;
     private EditText playerName;
 
+    //current team stats
+    private TextView teamGoals;
+    private TextView teamRed;
+    private TextView teamYellow;
+
     private EditText teamName; //new team name
 
     private ImageView teamLogo; //team logo
@@ -59,6 +65,11 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //initialize team stats
+        teamGoals = (TextView) findViewById(R.id.team_goals);
+        teamRed = (TextView) findViewById(R.id.team_red);
+        teamYellow = (TextView) findViewById(R.id.team_yellow);
 
         //initialize buttons and connect to view
         playerView = (Button) findViewById(R.id.team_players);
@@ -131,12 +142,40 @@ public class MainActivity extends ActionBarActivity {
             teamSelected = parent.getItemAtPosition(position).toString(); //get selected item
 
             displayPositions(); //update team positions in position spinner
+            teamStats(); //display team stats
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
 
         }
+    }
+
+    /*
+     * method: teamStats            Checks for players in the selected team then gets player stats
+     *                              and displays them on gui.
+     */
+    public void teamStats() {
+        Set<String> keys = players.keySet(); //get all player keys
+
+        //variables to hold team stats
+        int yellow = 0;
+        int red = 0;
+        int goals = 0;
+
+        //check if players are in selected team and display team stats
+        for(String k: keys) {
+            if(players.get(k).getTeamName().equals(teamSelected)) {
+                yellow += players.get(k).getYellowCards();
+                red += players.get(k).getRedCards();
+                goals += players.get(k).getGoalsScored();
+            }
+        }
+
+        //display team stats
+        teamYellow.setText(yellow + "");
+        teamRed.setText(red + "");
+        teamGoals.setText(goals + "");
     }
 
     /*
@@ -180,6 +219,7 @@ public class MainActivity extends ActionBarActivity {
         players.put( name, currentPlayer); //add new player
 
         displayPositions(); //update positions in a team
+        teamStats(); //update team stats
     }
 
     /*
