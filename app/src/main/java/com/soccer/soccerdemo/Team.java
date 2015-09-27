@@ -3,19 +3,19 @@ package com.soccer.soccerdemo;
 import android.media.Image;
 import android.widget.ImageView;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
  * Created by chunm18 on 9/26/2015.
  */
-public class Team {
+public class Team implements Serializable {
 
     //team stats
     private int goals;
     private int red_cards;
     private int yellow_cards;
     private String[] positions;
-    //HashMap<String, Player> players; //playerName = key
 
     //team name and logo
     private String teamName;

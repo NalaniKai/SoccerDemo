@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Set;
 
 
@@ -36,6 +37,8 @@ public class PlayersActivity extends ActionBarActivity {
     ArrayAdapter<String> adapter; //adapter for team spinners
     ArrayList<String> team_list; //holds team names
 
+    HashMap<String, Player> players; //players hashmap
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +46,12 @@ public class PlayersActivity extends ActionBarActivity {
 
         team_list = new ArrayList<>(); //initialize array list for teams
 
+        players = new HashMap<>();
+
         Intent intent = getIntent(); //get intent
 
         team_list = intent.getStringArrayListExtra("hi"); //get array list of team names
+        players = (HashMap<String, Player>) intent.getSerializableExtra("players"); //get player hashmap
 
         //initialize team spinners
         spinner1 = (Spinner) findViewById(R.id.spinner_team1);

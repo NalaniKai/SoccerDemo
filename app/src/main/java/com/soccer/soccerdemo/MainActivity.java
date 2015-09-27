@@ -256,6 +256,7 @@ public class MainActivity extends ActionBarActivity {
             Intent intent = new Intent(MainActivity.this,PlayersActivity.class); //create intent
 
             intent.putStringArrayListExtra("hi", teamNames); //put team names into intent
+            intent.putExtra("players", players); //put hashtable of players into intent
             startActivity(intent); //change to PlayerActivity view
         }
     }

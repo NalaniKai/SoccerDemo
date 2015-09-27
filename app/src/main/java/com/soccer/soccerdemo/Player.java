@@ -1,9 +1,11 @@
 package com.soccer.soccerdemo;
 
+import java.io.Serializable;
+
 /**
  * Created by chunm18 on 9/26/2015.
  */
-public class Player {
+public class Player implements Serializable {
 
     private String name;
     private String position;
