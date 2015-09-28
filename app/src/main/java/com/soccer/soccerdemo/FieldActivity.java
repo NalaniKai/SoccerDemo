@@ -6,12 +6,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
+import java.util.Set;
 
 
 public class FieldActivity extends ActionBarActivity {
@@ -29,27 +32,29 @@ public class FieldActivity extends ActionBarActivity {
     private Spinner players2;
 
     //arrayList of teams and players
-    private ArrayList<String> team_list;
-    private ArrayList<String> player_list;
+    protected ArrayList<String> team_list;
+    protected ArrayList<String> player_list;
 
     //array adapter for teams and players
-    private ArrayAdapter<String> adapter_teams;
-    private ArrayAdapter<String> adapter_players;
+    protected ArrayAdapter<String> adapter_teams;
+    protected ArrayAdapter<String> adapter_players;
+
+    HashMap<String, Player> players; //hashmap of players
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_field);
 
+        players = new HashMap<>(); //initialize hashmap of players
+
         //initialize array list for teams and players
         team_list = new ArrayList<>();
         player_list = new ArrayList<>();
 
-        //initialize button to go back to stats page
-        stats = (Button) findViewById(R.id.return_stats);
+        stats = (Button) findViewById(R.id.return_stats); //initialize button to go back to stats page
 
-        //initialize button to play game
-        play = (Button) findViewById(R.id.play);
+        play = (Button) findViewById(R.id.play); //initialize button to play game
 
         //initialize spinners for teams
         team1 = (Spinner) findViewById(R.id.spinner_team1);
@@ -62,6 +67,7 @@ public class FieldActivity extends ActionBarActivity {
         Intent intent = getIntent(); //get intent
 
         team_list = intent.getStringArrayListExtra("teams"); //get team name array list
+        players = (HashMap<String, Player>) intent.getSerializableExtra("players"); //get players
 
         //set adapter and connect to team spinners
         adapter_teams = new ArrayAdapter<>(this,
@@ -72,18 +78,53 @@ public class FieldActivity extends ActionBarActivity {
         team1.setAdapter(adapter_teams);
         team2.setAdapter(adapter_teams);
 
-        //set adapter and connect to player spinners
-        adapter_players = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1,
-                android.R.id.text1,
-                player_list);
-        adapter_players.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        players1.setAdapter(adapter_players);
-        players2.setAdapter(adapter_players);
-
         //set on click listeners for buttons
         stats.setOnClickListener(new returnToStatsListener());
         play.setOnClickListener(new playListener());
+        team1.setOnItemSelectedListener(new team1Listener());
+        team2.setOnItemSelectedListener(new team2Listener());
+    }
+
+    /*
+    * class: team2Listener      Listens for selected team on right side of screen.
+    */
+    public class team2Listener implements AdapterView.OnItemSelectedListener {
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            String selectedTeam = parent.getItemAtPosition(position).toString(); //get selected team
+
+            Set<String> keys = players.keySet(); //get all player keys
+
+            //check for players in team
+            for(String k: keys) {
+                if(players.get(k).getTeamName().equals(selectedTeam)) {
+                    player_list.add(k); //stores players in selected team
+                }
+            }
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    }
+
+    /*
+     * class: team1Listener      Listens for selected team on left side of screen.
+     */
+    private class team1Listener implements AdapterView.OnItemSelectedListener {
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
     }
 
     /*

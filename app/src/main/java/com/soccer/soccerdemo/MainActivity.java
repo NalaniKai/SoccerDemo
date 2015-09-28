@@ -189,6 +189,7 @@ public class MainActivity extends ActionBarActivity {
             Intent intent = new Intent(MainActivity.this, FieldActivity.class);
 
             intent.putStringArrayListExtra("teams", teamNames); //add team names to intent
+            intent.putExtra("players", players); //add players hashmap to intent
 
             startActivity(intent); //change to field activity view
         }
