@@ -250,32 +250,16 @@ public class PlayersActivity extends ActionBarActivity {
     /*
      *  class: statsListener            Goes back to MainActivity view and closes out of current view.
      */
-    private class statsListener implements View.OnClickListener {
+    public class statsListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-
+            Intent i = new Intent();
+            i.putExtra("players updated", players);
+            i.putExtra("hi", "test");
+            setResult(2, i);
             finish(); //closes current view and returns to the main view
         }
-
-        /*
-                send data back from activity
-
-        @override
-        onActivityResult(ssdfs) {
-            if(requestCode == 100) {
-                if(resultCode == 1) {
-                    data.getStringExtra("goback");
-                }
-            }
-
-        }
-
-        before finish
-        intent.putExtra("goback", "yay");
-        setResult(1);
-        finish();
-         */
     }
 
     @Override

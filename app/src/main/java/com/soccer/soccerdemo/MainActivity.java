@@ -191,7 +191,7 @@ public class MainActivity extends ActionBarActivity {
             intent.putStringArrayListExtra("teams", teamNames); //add team names to intent
             intent.putExtra("players", players); //add players hashmap to intent
 
-            startActivity(intent); //change to field activity view
+            startActivityForResult(intent, 1); //change to field activity view
         }
     }
 
@@ -297,6 +297,23 @@ public class MainActivity extends ActionBarActivity {
 
         currentTeam = new Team(teamName, teamLogo); //create new team
         teams.put(teamName, currentTeam); //add team to hashmap
+    }
+
+    public void  onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 1) {
+
+            if(resultCode == 2) {
+                //get updated player hashmap
+                players = (HashMap<String, Player>) data.getSerializableExtra("players updated");
+                String s = data.getStringExtra("hi");
+
+                teamName.setText(s);
+
+                displayPositions(); //update player positions if players changed teams
+            }
+        }
     }
 
     @Override
