@@ -35,6 +35,14 @@ public class PlayersActivity extends ActionBarActivity {
     private Spinner spinnerMemb1;
     private Spinner spinnerMemb2;
 
+    //players
+    String mem1;
+    String mem2;
+
+    //teams
+    String team1;
+    String team2;
+
     ArrayAdapter<String> adapterTeam; //adapter for team spinners
     ArrayList<String> team_list; //holds team names
 
@@ -61,12 +69,10 @@ public class PlayersActivity extends ActionBarActivity {
         spinnerMemb1 = (Spinner) findViewById(R.id.spinner_members1);
         spinnerMemb2 = (Spinner) findViewById(R.id.spinner_members2);
 
-        //initialize button to go back to MainActivity
+        //initialize buttons
         statsBtn = (Button) findViewById(R.id.statsButton);
-
-        //buttons to exchange players between teams
-        right = (ImageButton) findViewById(R.id.arrow_right);
         left = (ImageButton) findViewById(R.id.arrow_left);
+        right = (ImageButton) findViewById(R.id.arrow_right);
 
         team_list = new ArrayList<>(); //initialize array list for teams
 
@@ -87,9 +93,73 @@ public class PlayersActivity extends ActionBarActivity {
         spinner2Team.setAdapter(adapterTeam);
 
         //set listeners
-        statsBtn.setOnClickListener(new statsListener());
-        spinner1Team.setOnItemSelectedListener(new s1TeamListener());
-        spinner2Team.setOnItemSelectedListener(new s2TeamListener());
+        statsBtn.setOnClickListener(new statsListener()); //button to return to MainActivity
+        spinner1Team.setOnItemSelectedListener(new s1TeamListener()); //team on left
+        spinner2Team.setOnItemSelectedListener(new s2TeamListener()); //team on right
+        spinnerMemb1.setOnItemSelectedListener(new player1Listener()); //players on left
+        spinnerMemb2.setOnItemSelectedListener(new player2Listener()); //players on right
+        left.setOnClickListener(new leftListener()); //players from right to left
+        right.setOnClickListener(new rightListener()); //players from left to right
+    }
+
+    /*
+     * class: player1Listener              Gets the player selected in the list on the left.
+     */
+    public class player1Listener implements AdapterView.OnItemSelectedListener {
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            mem1 = parent.getItemAtPosition(position).toString(); //selected player
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    }
+
+    /*
+     * class: leftListener          Moves the player on the right to the team on the left.
+     */
+    public class leftListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            players.get(mem2).setTeamName(team1);
+
+            displayPlayers2();
+            displayPlayers1();
+        }
+    }
+
+    /*
+     * class: player2Listener       Gets the player selected on the right.
+     */
+    public class player2Listener implements AdapterView.OnItemSelectedListener {
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            mem2 = parent.getItemAtPosition(position).toString();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    }
+
+    /*
+     * class: rightListener         Moves the player on the left to the team on the right.
+     */
+    public class rightListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            players.get(mem1).setTeamName(team2);
+
+            displayPlayers1(); //update left player spinner
+            displayPlayers2(); //update right player spinner
+        }
     }
 
     /*
@@ -100,19 +170,9 @@ public class PlayersActivity extends ActionBarActivity {
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            String selectedTeam = parent.getItemAtPosition(position).toString(); //get selected team
+            team2 = parent.getItemAtPosition(position).toString(); //get selected team
 
-            displayPlayers2(selectedTeam); //display players in team 2
-            String playerNames = ""; //string to hold player names
-
-            Set<String> keys = players.keySet(); //get all player keys
-
-            //check for players in team
-            for(String k: keys) {
-                if(players.get(k).getTeamName().equals(selectedTeam)) {
-                    playerNames += k + "\n"; //stores players in selected team
-                }
-            }
+            displayPlayers2(); //display players in team 2
         }
 
         @Override
@@ -124,17 +184,18 @@ public class PlayersActivity extends ActionBarActivity {
     /*
      * method: displayPlayers2          Displays players in team selected on right drop down.
      */
-    public void displayPlayers2 (String team) {
+    public void displayPlayers2 () {
         player2List = new ArrayList<>(); //new arrayList for players
 
         Set<String> keys = players.keySet(); //get keys for all players
 
         for(String k: keys) {
-            if(players.get(k).getTeamName().equals(team)) {
-                player2List.add(k);
+            if(players.get(k).getTeamName().equals(team2)) {
+                player2List.add(k); //add players to spinner on right
             }
         }
 
+        //set adapter and connect to spinner
         adapterPlayers2 = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
@@ -151,9 +212,9 @@ public class PlayersActivity extends ActionBarActivity {
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            String selectedTeam = parent.getItemAtPosition(position).toString(); //get selected team
+            team1 = parent.getItemAtPosition(position).toString(); //get selected team
 
-            displayPlayers1(selectedTeam); //display players in team
+            displayPlayers1(); //display players in team
         }
 
         @Override
@@ -165,14 +226,14 @@ public class PlayersActivity extends ActionBarActivity {
     /*
      * method: displayPlayers           Displays players in left drop down for members.
      */
-    public void displayPlayers1(String team) {
+    public void displayPlayers1() {
         player1List = new ArrayList<>(); //new player list
 
         Set<String> keys = players.keySet(); //gets all player keys
 
         //check for players in team
         for(String k: keys) {
-            if(players.get(k).getTeamName().equals(team)) {
+            if(players.get(k).getTeamName().equals(team1)) {
                 player1List.add(k); //gets players in team
             }
         }
@@ -193,8 +254,9 @@ public class PlayersActivity extends ActionBarActivity {
 
         @Override
         public void onClick(View v) {
-            finish();
-        } //closes current view and returns to the main view
+
+            finish(); //closes current view and returns to the main view
+        }
 
         /*
                 send data back from activity

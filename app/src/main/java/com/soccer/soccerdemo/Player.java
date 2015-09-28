@@ -30,4 +30,7 @@ public class Player implements Serializable {
     public int getGoalsScored() { return goals; }
     public int getRedCards() { return red; }
     public int getYellowCards() { return yellow; }
+
+    //set player team
+    public void setTeamName(String team) { this.team = team; }
 }
