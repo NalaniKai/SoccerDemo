@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,8 +61,6 @@ public class PlayersActivity extends ActionBarActivity {
         //initialize button to go back to MainActivity
         statsBtn = (Button) findViewById(R.id.statsButton);
 
-        statsBtn.setOnClickListener(new statsListener()); //set listener
-
         //buttons to exchange players between teams
         right = (ImageButton) findViewById(R.id.arrow_right);
         left = (ImageButton) findViewById(R.id.arrow_left);
@@ -78,6 +77,71 @@ public class PlayersActivity extends ActionBarActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter);
         spinner2.setAdapter(adapter);
+
+        //set listeners
+        statsBtn.setOnClickListener(new statsListener());
+        spinner1.setOnItemSelectedListener(new s1Listener());
+        spinner2.setOnItemSelectedListener(new s2Listener());
+    }
+
+    /*
+     * class: s2Listener            Listens for selected item in spinner on the right side of the
+     *                              screen and displays the players in that team.
+     */
+    private class s2Listener implements AdapterView.OnItemSelectedListener {
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            String selectedTeam = parent.getItemAtPosition(position).toString(); //get selected team
+
+            String playerNames = ""; //string to hold player names
+
+            Set<String> keys = players.keySet(); //get all player keys
+
+            //check for players in team
+            for(String k: keys) {
+                if(players.get(k).getTeamName().equals(selectedTeam)) {
+                    playerNames += k + "\n"; //stores players in selected team
+                }
+            }
+
+            memb2.setText(playerNames); //displays players in selected team
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    }
+
+    /*
+     * class: s1Listener            Listens for selected item in spinner on the left side of the
+     *                              screen and displays the players in that team.
+     */
+    private class s1Listener implements AdapterView.OnItemSelectedListener {
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            String selectedTeam = parent.getItemAtPosition(position).toString(); //get selected team
+
+            String playerNames = ""; //string to hold player names
+
+            Set<String> keys = players.keySet(); //gets all player keys
+
+            //check for players in team
+            for(String k: keys) {
+                if(players.get(k).getTeamName().equals(selectedTeam)) {
+                    playerNames += k + "\n"; //stores players in selected team
+                }
+            }
+
+            memb1.setText(playerNames); //displays players in selected team
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
     }
 
     /*
