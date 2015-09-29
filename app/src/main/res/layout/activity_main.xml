@@ -15,7 +15,8 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="20dp">
+            android:paddingBottom="20dp"
+            android:weightSum="1">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -23,7 +24,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Teams:"
                 android:id="@+id/team_titles"
-                android:layout_weight="0.01"
+                android:layout_weight="0.10"
                 android:textSize="25dp" />
 
             <Spinner
@@ -37,7 +38,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Position:"
                 android:id="@+id/position_title"
-                android:layout_weight="0.01"
+                android:layout_weight="0.09"
                 android:textSize="25dp" />
 
             <Spinner
@@ -45,16 +46,11 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner_positions" />
 
-            <FrameLayout
-                android:layout_width="206dp"
-                android:layout_height="103dp">
-
-                <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:id="@+id/team_logo"
-                    android:background="@mipmap/koa_logo" />
-            </FrameLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/team_logo"
+                android:background="@mipmap/koa_logo" />
 
         </LinearLayout>
 

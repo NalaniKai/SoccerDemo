@@ -159,6 +159,7 @@ public class MainActivity extends ActionBarActivity {
             teamStats(); //display team stats
 
             //update to selected team logo
+            teamLogoCurrent.setImageResource(android.R.color.transparent);
             teamLogoCurrent.setImageResource(teams.get(teamSelected).getLogoName());
 
         }
