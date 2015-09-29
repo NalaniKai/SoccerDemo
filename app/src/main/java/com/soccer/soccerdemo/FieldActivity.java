@@ -1,10 +1,12 @@
 package com.soccer.soccerdemo;
 
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,12 +21,18 @@ import java.util.Set;
 
 public class FieldActivity extends ActionBarActivity {
 
+    private PlayersInGame playersDraw;
+    private Canvas c;
+
     //buttons to return to the main activity and play the game
     private Button stats;
     private Button play;
 
+    //selected teams and players
     String team1; //team selected on left
     String team2; //team selected on right
+    String player1;
+    String player2;
 
     //spinners for teams
     private Spinner spinnerTeam1;
@@ -54,6 +62,8 @@ public class FieldActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_field);
+
+        playersDraw = (PlayersInGame) findViewById(R.id.surfaceViewPlayers); //players surface view
 
         team_list = new ArrayList<>(); //initialize array list for teams and players
 
@@ -89,6 +99,41 @@ public class FieldActivity extends ActionBarActivity {
         play.setOnClickListener(new playListener());
         spinnerTeam1.setOnItemSelectedListener(new team1Listener());
         spinnerTeam2.setOnItemSelectedListener(new team2Listener());
+        spinnerPlayers1.setOnItemSelectedListener(new player1Listener());
+        spinnerPlayers2.setOnItemSelectedListener(new player2Listener());
+    }
+
+
+    /*
+     * class: player2Listener
+     */
+    public class player2Listener implements AdapterView.OnItemSelectedListener {
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            player2 = parent.getItemAtPosition(position).toString(); //get selected player
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    }
+
+    /*
+     * class: player1Listener
+     */
+    public class player1Listener implements AdapterView.OnItemSelectedListener {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            player1 = parent.getItemAtPosition(position).toString(); //get selected player
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
     }
 
     /*

@@ -134,7 +134,26 @@
                 android:layout_height="fill_parent"
                 android:id="@+id/surfaceView"
                 android:layout_gravity="center_vertical" />
+
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Space
+            android:layout_width="20px"
+            android:layout_height="200dp" />
+
+        <com.soccer.soccerdemo.PlayersInGame
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/surfaceViewPlayers"
+            android:layout_gravity="center_vertical"
+            android:background="#00fffefa" />
+
     </LinearLayout>
 
 </RelativeLayout>
