@@ -23,20 +23,19 @@ public class FieldActivity extends ActionBarActivity {
     private Button stats;
     private Button play;
 
-    String team1;
-    String team2;
+    String team1; //team selected on left
+    String team2; //team selected on right
 
     //spinners for teams
     private Spinner spinnerTeam1;
     private Spinner spinnerTeam2;
 
     //spinners for players
-    private Spinner players1;
-    private Spinner players2;
+    private Spinner spinnerPlayers1;
+    private Spinner spinnerPlayers2;
 
     //arrayList of teams and players
     protected ArrayList<String> team_list;
-    protected ArrayList<String> player_list;
 
     //array adapter for teams and players
     protected ArrayAdapter<String> adapter_teams;
@@ -56,14 +55,9 @@ public class FieldActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_field);
 
-        players = new HashMap<>(); //initialize hashmap of players
-
-        //initialize array list for teams and players
-        team_list = new ArrayList<>();
-        player_list = new ArrayList<>();
+        team_list = new ArrayList<>(); //initialize array list for teams and players
 
         stats = (Button) findViewById(R.id.return_stats); //initialize button to go back to stats page
-
         play = (Button) findViewById(R.id.play); //initialize button to play game
 
         //initialize spinners for teams
@@ -71,8 +65,10 @@ public class FieldActivity extends ActionBarActivity {
         spinnerTeam2 = (Spinner) findViewById(R.id.spinner_team2);
 
         //initialize spinners for players
-        players1 = (Spinner) findViewById(R.id.spinner_players1);
-        players2 = (Spinner) findViewById(R.id.spinner_players2);
+        spinnerPlayers1 = (Spinner) findViewById(R.id.spinner_players1);
+        spinnerPlayers2 = (Spinner) findViewById(R.id.spinner_players2);
+
+        players = new HashMap<>(); //initialize hashmap of players
 
         Intent intent = getIntent(); //get intent
 
@@ -104,7 +100,7 @@ public class FieldActivity extends ActionBarActivity {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             team2 = parent.getItemAtPosition(position).toString(); //get selected team
 
-            displayPlayers2();
+            displayPlayers2(); //display players in team selected on right
 
         }
 
@@ -131,7 +127,7 @@ public class FieldActivity extends ActionBarActivity {
                 android.R.id.text1,
                 player2List);
         adapterPlayers2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        players2.setAdapter(adapterPlayers2);
+        spinnerPlayers1.setAdapter(adapterPlayers2);
     }
 
     /*
@@ -172,7 +168,7 @@ public class FieldActivity extends ActionBarActivity {
                 android.R.id.text1,
                 player2List);
         adapterPlayers1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        players1.setAdapter(adapterPlayers1);
+        spinnerPlayers1.setAdapter(adapterPlayers1);
     }
 
     /*
