@@ -23,9 +23,12 @@ public class FieldActivity extends ActionBarActivity {
     private Button stats;
     private Button play;
 
+    String team1;
+    String team2;
+
     //spinners for teams
-    private Spinner team1;
-    private Spinner team2;
+    private Spinner spinnerTeam1;
+    private Spinner spinnerTeam2;
 
     //spinners for players
     private Spinner players1;
@@ -37,7 +40,14 @@ public class FieldActivity extends ActionBarActivity {
 
     //array adapter for teams and players
     protected ArrayAdapter<String> adapter_teams;
-    protected ArrayAdapter<String> adapter_players;
+
+    //adapters for players
+    ArrayAdapter<String> adapterPlayers1;
+    ArrayAdapter<String> adapterPlayers2;
+
+    //ArrayLists for players
+    ArrayList<String> player1List;
+    ArrayList<String> player2List;
 
     HashMap<String, Player> players; //hashmap of players
 
@@ -57,8 +67,8 @@ public class FieldActivity extends ActionBarActivity {
         play = (Button) findViewById(R.id.play); //initialize button to play game
 
         //initialize spinners for teams
-        team1 = (Spinner) findViewById(R.id.spinner_team1);
-        team2 = (Spinner) findViewById(R.id.spinner_team2);
+        spinnerTeam1 = (Spinner) findViewById(R.id.spinner_team1);
+        spinnerTeam2 = (Spinner) findViewById(R.id.spinner_team2);
 
         //initialize spinners for players
         players1 = (Spinner) findViewById(R.id.spinner_players1);
@@ -75,14 +85,14 @@ public class FieldActivity extends ActionBarActivity {
                 android.R.id.text1,
                 team_list);
         adapter_teams.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        team1.setAdapter(adapter_teams);
-        team2.setAdapter(adapter_teams);
+        spinnerTeam1.setAdapter(adapter_teams);
+        spinnerTeam2.setAdapter(adapter_teams);
 
         //set on click listeners for buttons
         stats.setOnClickListener(new returnToStatsListener());
         play.setOnClickListener(new playListener());
-        team1.setOnItemSelectedListener(new team1Listener());
-        team2.setOnItemSelectedListener(new team2Listener());
+        spinnerTeam1.setOnItemSelectedListener(new team1Listener());
+        spinnerTeam2.setOnItemSelectedListener(new team2Listener());
     }
 
     /*
@@ -92,16 +102,9 @@ public class FieldActivity extends ActionBarActivity {
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            String selectedTeam = parent.getItemAtPosition(position).toString(); //get selected team
+            team2 = parent.getItemAtPosition(position).toString(); //get selected team
 
-            Set<String> keys = players.keySet(); //get all player keys
-
-            //check for players in team
-            for(String k: keys) {
-                if(players.get(k).getTeamName().equals(selectedTeam)) {
-                    player_list.add(k); //stores players in selected team
-                }
-            }
+            displayPlayers2();
 
         }
 
@@ -111,6 +114,26 @@ public class FieldActivity extends ActionBarActivity {
         }
     }
 
+    public void displayPlayers2() {
+        player2List = new ArrayList<>(); //new arrayList for players
+
+        Set<String> keys = players.keySet(); //get keys for all players
+
+        for(String k: keys) {
+            if(players.get(k).getTeamName().equals(team2)) {
+                player2List.add(k); //add players to spinner on right
+            }
+        }
+
+        //set adapter and connect to spinner
+        adapterPlayers2 = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1,
+                android.R.id.text1,
+                player2List);
+        adapterPlayers2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        players2.setAdapter(adapterPlayers2);
+    }
+
     /*
      * class: team1Listener      Listens for selected team on left side of screen.
      */
@@ -118,13 +141,38 @@ public class FieldActivity extends ActionBarActivity {
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            team1 = parent.getItemAtPosition(position).toString();
 
+            displayPlayers1(); //display players in team selected on left
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
 
         }
+    }
+
+    /*
+     * method: displayPlayers1          Display players in team selected on the left.
+     */
+    public void displayPlayers1() {
+        player1List = new ArrayList<>(); //new arrayList for players
+
+        Set<String> keys = players.keySet(); //get keys for all players
+
+        for(String k: keys) {
+            if(players.get(k).getTeamName().equals(team1)) {
+                player1List.add(k); //add players to spinner on right
+            }
+        }
+
+        //set adapter and connect to spinner
+        adapterPlayers1 = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1,
+                android.R.id.text1,
+                player2List);
+        adapterPlayers1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        players1.setAdapter(adapterPlayers1);
     }
 
     /*
