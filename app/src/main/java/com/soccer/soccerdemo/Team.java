@@ -20,14 +20,16 @@ public class Team implements Serializable {
     //team name and logo
     private String teamName;
     private ImageView logo;
+    private int logoID;
 
-    public Team(String teamName, ImageView logo) {
+    public Team(String teamName, ImageView logo, int logoID) {
         this.goals = 0;
         this.red_cards = 0;
         this.yellow_cards = 0;
         this.positions = null;
         this.teamName = teamName;
         this.logo = logo;
+        this.logoID = logoID;
     }
 
     //get team stats
@@ -39,6 +41,7 @@ public class Team implements Serializable {
     //get team name and logo
     public String getTeamName() { return teamName; }
     public ImageView getTeamLogo() { return logo; }
+    public int getLogoName() { return logoID; }
 
     //set team stats
     public void setGoals(int goals) { this.goals = goals; }

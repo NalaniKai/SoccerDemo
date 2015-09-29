@@ -23,11 +23,11 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Teams:"
                 android:id="@+id/team_titles"
-                android:layout_weight=".1"
+                android:layout_weight="0.01"
                 android:textSize="25dp" />
 
             <Spinner
-                android:layout_width="322dp"
+                android:layout_width="198dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner_teams" />
 
@@ -37,19 +37,24 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Position:"
                 android:id="@+id/position_title"
-                android:layout_weight=".1"
+                android:layout_weight="0.01"
                 android:textSize="25dp" />
 
             <Spinner
-                android:layout_width="322dp"
+                android:layout_width="168dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner_positions" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/team_logo"
-                android:layout_weight=".5" />
+            <FrameLayout
+                android:layout_width="206dp"
+                android:layout_height="103dp">
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/team_logo"
+                    android:background="@mipmap/koa_logo" />
+            </FrameLayout>
 
         </LinearLayout>
 

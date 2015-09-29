@@ -1,6 +1,7 @@
 package com.soccer.soccerdemo;
 
 import android.content.Intent;
+import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -28,6 +29,7 @@ public class MainActivity extends ActionBarActivity {
     Player currentPlayer; //current player
 
     String teamSelected; //team selected in team spinner
+    String logo;
 
     private Button playerView; //btn to change to PlayersActivity
     private Button addPlayer; //btn to add a new player
@@ -48,7 +50,7 @@ public class MainActivity extends ActionBarActivity {
 
     private EditText teamName; //new team name
 
-    private ImageView teamLogo; //team logo
+    private ImageView teamLogoCurrent; //team logo
 
     HashMap<String, Player> players; //stores players
 
@@ -86,7 +88,7 @@ public class MainActivity extends ActionBarActivity {
 
         //initialize text field for new team and image view for logo
         teamName = (EditText) findViewById(R.id.team_name);
-        teamLogo = (ImageView) findViewById(R.id.team_logo);
+        teamLogoCurrent = (ImageView) findViewById(R.id.team_logo);
 
         //initialize spinners for teams and positions
         spinnerTeams = (Spinner) findViewById(R.id.spinner_teams);
@@ -104,16 +106,28 @@ public class MainActivity extends ActionBarActivity {
         players.put("Sam", currentPlayer);
         currentPlayer = new Player("Linda", "Defender", "Meow", 1, 1, 1);
         players.put("Linda", currentPlayer);
+        currentPlayer = new Player("Jack", "Defender", "Puppies", 2, 1, 2);
+        players.put("Jack", currentPlayer);
 
         //add team names to array list
         teamNames.add("Meow");
         teamNames.add("Kittens");
+        teamNames.add("Puppies");
 
-        //start with teams in hashmap
-        currentTeam = new Team("Meow", teamLogo);
+        //create and add team Meow
+        teamLogoCurrent.setImageResource(R.mipmap.flower_logo);
+        currentTeam = new Team("Meow", teamLogoCurrent, R.mipmap.flower_logo);
         teams.put("Meow", currentTeam);
-        currentTeam = new Team("Kittens", teamLogo);
+
+        //create and add team Kittens
+        teamLogoCurrent.setImageResource(R.mipmap.emma_logo);
+        currentTeam = new Team("Kittens", teamLogoCurrent, R.mipmap.emma_logo);
         teams.put("Kittens", currentTeam);
+
+        //create and add team Puppies
+        teamLogoCurrent.setImageResource(R.mipmap.koa_logo);
+        currentTeam = new Team("Puppies", teamLogoCurrent, R.mipmap.koa_logo);
+        teams.put("Puppies", currentTeam);
 
         //set listeners
         addTeam.setOnClickListener(new addTeamListener());
@@ -143,6 +157,10 @@ public class MainActivity extends ActionBarActivity {
 
             displayPositions(); //update team positions in position spinner
             teamStats(); //display team stats
+
+            //update to selected team logo
+            teamLogoCurrent.setImageResource(teams.get(teamSelected).getLogoName());
+
         }
 
         @Override
@@ -309,7 +327,7 @@ public class MainActivity extends ActionBarActivity {
         spinnerAdapter.addAll(teamNames);
         spinnerAdapter.notifyDataSetChanged();
 
-        currentTeam = new Team(teamName, teamLogo); //create new team
+        currentTeam = new Team(teamName, teamLogoCurrent, R.mipmap.thunder_logo); //create new team
         teams.put(teamName, currentTeam); //add team to hashmap
     }
 
