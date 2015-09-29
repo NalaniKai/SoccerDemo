@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +21,8 @@ import java.util.Set;
 
 
 public class FieldActivity extends ActionBarActivity {
+
+    private TextView winningTeam;
 
     private PlayersInGame playersDraw;
     private Canvas c;
@@ -62,6 +65,8 @@ public class FieldActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_field);
+
+        winningTeam = (TextView) findViewById(R.id.winner);
 
         playersDraw = (PlayersInGame) findViewById(R.id.surfaceViewPlayers); //players surface view
 
@@ -224,6 +229,13 @@ public class FieldActivity extends ActionBarActivity {
         @Override
         public void onClick(View v) {
             int winner = (int) (Math.random()*2.0); //chooses random winner
+
+            if(winner == 0) {
+                winningTeam.setText(team1 + " wins!");
+            }
+            else {
+                winningTeam.setText(team2 + " wins!");
+            }
         }
     }
 
