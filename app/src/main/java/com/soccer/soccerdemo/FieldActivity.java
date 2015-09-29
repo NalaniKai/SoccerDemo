@@ -127,7 +127,7 @@ public class FieldActivity extends ActionBarActivity {
                 android.R.id.text1,
                 player2List);
         adapterPlayers2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerPlayers1.setAdapter(adapterPlayers2);
+        spinnerPlayers2.setAdapter(adapterPlayers2);
     }
 
     /*
@@ -166,7 +166,7 @@ public class FieldActivity extends ActionBarActivity {
         adapterPlayers1 = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
-                player2List);
+                player1List);
         adapterPlayers1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerPlayers1.setAdapter(adapterPlayers1);
     }
