@@ -88,6 +88,7 @@ public class FieldActivity extends ActionBarActivity {
         Intent intent = getIntent(); //get intent
 
         team_list = intent.getStringArrayListExtra("teams"); //get team name array list
+
         players = (HashMap<String, Player>) intent.getSerializableExtra("players"); //get players
 
         //set adapter and connect to team spinners
@@ -232,9 +233,35 @@ public class FieldActivity extends ActionBarActivity {
 
             if(winner == 0) {
                 winningTeam.setText(team1 + " wins!");
+
+                Set<String> keys = players.keySet(); //get keys for all players
+
+                for(String k: keys) {
+                    if(players.get(k).getTeamName().equals(team1)) {
+                        players.get(k).setGoals(); //add 1 goal for each player on team
+
+                        //add 1 yellow card for players on team with less than 2 yellow cards
+                        if(players.get(k).getYellowCards() < 2) {
+                            players.get(k).setYellowCards();
+                        }
+                    }
+                }
             }
             else {
                 winningTeam.setText(team2 + " wins!");
+
+                Set<String> keys = players.keySet(); //get keys for all players
+
+                for(String k: keys) {
+                    if(players.get(k).getTeamName().equals(team2)) {
+                        players.get(k).setGoals(); //add 1 goal for each player on team
+
+                        //add 1 yellow card for players on team with less than 2 yellow cards
+                        if(players.get(k).getYellowCards() < 2) {
+                            players.get(k).setYellowCards();
+                        }
+                    }
+                }
             }
         }
     }
@@ -246,6 +273,10 @@ public class FieldActivity extends ActionBarActivity {
 
         @Override
         public void onClick(View v) {
+            Intent i = new Intent();
+
+            i.putExtra("stats updated", players);
+            setResult(2, i);
             finish(); //closes current view
         }
     }

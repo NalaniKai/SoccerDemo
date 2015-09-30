@@ -210,7 +210,7 @@ public class MainActivity extends ActionBarActivity {
             intent.putStringArrayListExtra("teams", teamNames); //add team names to intent
             intent.putExtra("players", players); //add players hashmap to intent
 
-            startActivity(intent); //change to field activity view
+            startActivityForResult(intent, 2); //change to field activity view
         }
     }
 
@@ -219,11 +219,21 @@ public class MainActivity extends ActionBarActivity {
 
         if(requestCode == 1) {
 
-            if(resultCode == 2) {
+            if(resultCode == 1) {
                 //get updated player hashmap
                 players = (HashMap<String, Player>) data.getSerializableExtra("players updated");
 
                 displayPositions(); //update player positions if players changed teams
+            }
+        }
+        else if(requestCode == 2) {
+
+            if(resultCode == 2) {
+                //update players hashmap
+                players = (HashMap<String, Player>) data.getSerializableExtra("stats updated");
+
+                //update team stats
+                teamStats();
             }
         }
     }

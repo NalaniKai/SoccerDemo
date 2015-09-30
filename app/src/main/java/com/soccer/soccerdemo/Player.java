@@ -33,4 +33,6 @@ public class Player implements Serializable {
 
     //set player team
     public void setTeamName(String team) { this.team = team; }
+    public void setGoals() { ++this.goals; }
+    public void setYellowCards() { ++this.yellow; }
 }

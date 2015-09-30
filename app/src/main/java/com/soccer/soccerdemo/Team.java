@@ -21,11 +21,13 @@ public class Team implements Serializable {
     private String teamName;
     private ImageView logo;
     private int logoID;
+    private int wins;
 
     public Team(String teamName, ImageView logo, int logoID) {
         this.goals = 0;
         this.red_cards = 0;
         this.yellow_cards = 0;
+        this.wins = 0;
         this.positions = null;
         this.teamName = teamName;
         this.logo = logo;
@@ -37,6 +39,7 @@ public class Team implements Serializable {
     public int getTeamRed() { return red_cards; }
     public int getTeamYellow() { return yellow_cards; }
     public String[] getTeamPositions() { return positions; }
+    public int getWins() { return wins; }
 
     //get team name and logo
     public String getTeamName() { return teamName; }
@@ -48,6 +51,7 @@ public class Team implements Serializable {
     public void setTeamRed(int red) { this.red_cards = red; }
     public void setTeamYellow(int yellow) { this.yellow_cards = yellow; }
     public void setTeamPositions(String[] position) { this.positions = position; }
+    public void setWins() { ++wins; }
 
     //set team name and logo
     public void setTeamName(String teamName) { this.teamName = teamName; }

@@ -257,7 +257,7 @@ public class PlayersActivity extends ActionBarActivity {
             Intent i = new Intent();
             i.putExtra("players updated", players);
             i.putExtra("hi", "test");
-            setResult(2, i);
+            setResult(1, i);
             finish(); //closes current view and returns to the main view
         }
     }
