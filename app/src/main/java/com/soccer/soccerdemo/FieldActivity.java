@@ -138,15 +138,44 @@ public class FieldActivity extends ActionBarActivity {
 
             if( !playerDrawn.get(player2).booleanValue()) {
 
-                float x = (float) Math.random() * playersDraw.getWidth();
-                float y = (float) Math.random() * playersDraw.getHeight();
+                float x = (float) (Math.random() * (playersDraw.getWidth()-100)) + 30; //get random x position
+                float y = (float) (Math.random() * (playersDraw.getHeight()-100)) + 30; //get random y position
 
                 c = playersDraw.getHolder().lockCanvas(); //lock canvas
+
                 playersDraw.drawPlayerTeam2(c, x, y, player2); //draws selected player on board
+
+                Set<String> playerNames = players.keySet(); //get all player names
+
+                //draw previously selected players
+                for(String name: playerNames) {
+
+                    //draw players on team 1
+                    if ( playerDrawn.get(name).booleanValue() && players.get(name).getTeam1()) {
+                        playersDraw.drawPlayerTeam1(c,
+                                players.get(name).getX(),
+                                players.get(name).getY(),
+                                name);
+                    }
+
+                    //draw players on team 2
+                    if ( playerDrawn.get(name).booleanValue() && !players.get(name).getTeam1() ) {
+                        playersDraw.drawPlayerTeam2(c,
+                                players.get(name).getX(),
+                                players.get(name).getY(),
+                                name);
+                    }
+                }
+
                 playersDraw.getHolder().unlockCanvasAndPost(c); //draw
                 playersDraw.postInvalidate();
 
+                //set player position
+                players.get(player2).setX(x);
+                players.get(player2).setY(y);
+
                 playerDrawn.put(player2, true); //track players drawn
+                players.get(player2).setTeam1(false);
             }
         }
 
@@ -166,13 +195,41 @@ public class FieldActivity extends ActionBarActivity {
 
             if( !playerDrawn.get(player1).booleanValue()) {
 
-                float x = (float) Math.random() * playersDraw.getWidth(); //get random x position
-                float y = (float) Math.random() * playersDraw.getHeight(); //get random y position
+                float x = (float) (Math.random() * (playersDraw.getWidth()-100) ) + 30; //get random x position
+                float y = (float) (Math.random() * (playersDraw.getHeight()-100) + 30); //get random y position
 
                 c = playersDraw.getHolder().lockCanvas(); //lock canvas
                 playersDraw.drawPlayerTeam1(c, x, y, player1); //draws selected player on board
+
+                Set<String> playerNames = players.keySet(); //get all player names
+
+                //draw previously selected players
+                for(String name: playerNames) {
+
+                    //draw players on team 1
+                    if ( playerDrawn.get(name).booleanValue() && players.get(name).getTeam1() ) {
+                        playersDraw.drawPlayerTeam1(c,
+                                players.get(name).getX(),
+                                players.get(name).getY(),
+                                name);
+                    }
+
+                    //draw players on team 2
+                    if ( playerDrawn.get(name).booleanValue() && !players.get(name).getTeam1() ) {
+                        playersDraw.drawPlayerTeam2(c,
+                                players.get(name).getX(),
+                                players.get(name).getY(),
+                                name);
+                    }
+                }
+
                 playersDraw.getHolder().unlockCanvasAndPost(c); //draw
                 playersDraw.postInvalidate();
+                players.get(player1).setTeam1(true); //set team 1 to true
+
+                //set player position
+                players.get(player1).setX(x);
+                players.get(player1).setY(y);
 
                 playerDrawn.put(player1, true); //track players drawn
             }
