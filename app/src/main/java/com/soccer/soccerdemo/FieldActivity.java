@@ -2,10 +2,14 @@ package com.soccer.soccerdemo;
 
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PixelFormat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,7 +26,7 @@ import java.util.Set;
 
 public class FieldActivity extends ActionBarActivity {
 
-    private TextView winningTeam;
+    private TextView winningTeam; //will display winning team
 
     private PlayersInGame playersDraw;
     private Canvas c;
@@ -59,6 +63,8 @@ public class FieldActivity extends ActionBarActivity {
     ArrayList<String> player1List;
     ArrayList<String> player2List;
 
+    HashMap<String, Boolean> playerDrawn; //check if player has been drawn
+
     HashMap<String, Player> players; //hashmap of players
 
     @Override
@@ -66,9 +72,12 @@ public class FieldActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_field);
 
-        winningTeam = (TextView) findViewById(R.id.winner);
+        winningTeam = (TextView) findViewById(R.id.winner); //initialize winner textview
 
         playersDraw = (PlayersInGame) findViewById(R.id.surfaceViewPlayers); //players surface view
+        playersDraw.setZOrderOnTop(true); //set view on top
+        SurfaceHolder holder = playersDraw.getHolder(); //create holder
+        holder.setFormat(PixelFormat.TRANSPARENT); //make surface view transparent
 
         team_list = new ArrayList<>(); //initialize array list for teams and players
 
@@ -85,11 +94,20 @@ public class FieldActivity extends ActionBarActivity {
 
         players = new HashMap<>(); //initialize hashmap of players
 
+        playerDrawn = new HashMap<>();
+
         Intent intent = getIntent(); //get intent
 
         team_list = intent.getStringArrayListExtra("teams"); //get team name array list
 
         players = (HashMap<String, Player>) intent.getSerializableExtra("players"); //get players
+
+        Set<String> playerNames = players.keySet(); //get all players names
+
+        //initialize players as not being drawn
+        for(String name: playerNames) {
+            playerDrawn.put(name, false);
+        }
 
         //set adapter and connect to team spinners
         adapter_teams = new ArrayAdapter<>(this,
@@ -109,7 +127,6 @@ public class FieldActivity extends ActionBarActivity {
         spinnerPlayers2.setOnItemSelectedListener(new player2Listener());
     }
 
-
     /*
      * class: player2Listener
      */
@@ -118,6 +135,27 @@ public class FieldActivity extends ActionBarActivity {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             player2 = parent.getItemAtPosition(position).toString(); //get selected player
+
+            if( !playerDrawn.get(player2).booleanValue()) {
+
+                float x = (float) Math.random() * playersDraw.getWidth();
+                float y = (float) Math.random() * playersDraw.getHeight();
+
+                c = playersDraw.getHolder().lockCanvas();
+
+                Paint blue = new Paint();
+                blue.setColor(Color.BLUE);
+
+                //draw blue dot representing player
+                c.drawCircle(x, y, 20, blue);
+                c.drawText(player2, x+40, y, blue);
+
+                //playersDraw.drawPlayer(c, x, y, player2); //draws selected player on board
+                playersDraw.getHolder().unlockCanvasAndPost(c); //draw
+                playersDraw.postInvalidate();
+
+                playerDrawn.put(player2, true); //track players drawn
+            }
         }
 
         @Override
@@ -134,6 +172,18 @@ public class FieldActivity extends ActionBarActivity {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             player1 = parent.getItemAtPosition(position).toString(); //get selected player
 
+            if( !playerDrawn.get(player1).booleanValue()) {
+
+                float x = (float) Math.random() * playersDraw.getWidth();
+                float y = (float) Math.random() * playersDraw.getHeight();
+
+                c = playersDraw.getHolder().lockCanvas();
+                //playersDraw.drawPlayer(c, x, y, player1); //draws selected player on board
+                playersDraw.getHolder().unlockCanvasAndPost(c); //draw
+                playersDraw.postInvalidate();
+
+                playerDrawn.put(player1, true); //track players drawn
+            }
         }
 
         @Override

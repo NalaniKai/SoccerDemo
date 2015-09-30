@@ -29,7 +29,6 @@ public class MainActivity extends ActionBarActivity {
     Player currentPlayer; //current player
 
     String teamSelected; //team selected in team spinner
-    String logo;
 
     private Button playerView; //btn to change to PlayersActivity
     private Button addPlayer; //btn to add a new player
@@ -43,12 +42,12 @@ public class MainActivity extends ActionBarActivity {
     private EditText playerPosition;
     private EditText playerName;
 
+    private EditText teamName; //new team name
+
     //current team stats
     private TextView teamGoals;
     private TextView teamRed;
     private TextView teamYellow;
-
-    private EditText teamName; //new team name
 
     private ImageView teamLogoCurrent; //team logo
 
