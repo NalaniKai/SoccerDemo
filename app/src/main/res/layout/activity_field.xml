@@ -152,18 +152,20 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:weightSum="1">
 
         <Space
             android:layout_width="20px"
             android:layout_height="200dp" />
 
         <com.soccer.soccerdemo.PlayersInGame
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="824dp"
+            android:layout_height="339dp"
             android:id="@+id/surfaceViewPlayers"
-            android:layout_gravity="center_vertical"
-            android:background="#00fffefa" />
+            android:layout_gravity="center"
+            android:background="#00fffefa"
+            android:layout_weight="0.58" />
 
     </LinearLayout>
 
