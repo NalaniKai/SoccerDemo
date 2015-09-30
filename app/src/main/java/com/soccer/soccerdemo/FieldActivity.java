@@ -24,24 +24,30 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Set;
 
-
+/*
+ * class: FieldActivity         A soccer field is draw and the user can view a list of the teams
+ *                              and players in each team. The user can select a player and the
+ *                              player will be drawn on the field. The user can also play a game
+ *                              where a random team is selected as a winner and player stats are
+ *                              updated. After a winner is selected another activity opens up to
+ *                              celebrate the win.
+ */
 public class FieldActivity extends ActionBarActivity {
 
     private TextView winningTeam; //will display winning team
 
-    private PlayersInGame playersDraw;
+    private PlayersInGame playersDraw; //surface view to draw players on
     private Canvas c;
 
     //buttons to return to the main activity and play the game
     private Button stats;
     private Button play;
-    private Button move;
 
     //selected teams and players
-    String team1; //team selected on left
-    String team2; //team selected on right
-    String player1;
-    String player2;
+    private String team1; //team selected on left
+    private String team2; //team selected on right
+    private String player1; //on left
+    private String player2; //on right
 
     //spinners for teams
     private Spinner spinnerTeam1;
@@ -52,29 +58,27 @@ public class FieldActivity extends ActionBarActivity {
     private Spinner spinnerPlayers2;
 
     //arrayList of teams and players
-    protected ArrayList<String> team_list;
+    private ArrayList<String> team_list;
 
     //array adapter for teams and players
-    protected ArrayAdapter<String> adapter_teams;
+    private ArrayAdapter<String> adapter_teams;
 
     //adapters for players
-    ArrayAdapter<String> adapterPlayers1;
-    ArrayAdapter<String> adapterPlayers2;
+    private ArrayAdapter<String> adapterPlayers1;
+    private ArrayAdapter<String> adapterPlayers2;
 
     //ArrayLists for players
-    ArrayList<String> player1List;
-    ArrayList<String> player2List;
+    private ArrayList<String> player1List;
+    private ArrayList<String> player2List;
 
-    HashMap<String, Boolean> playerDrawn; //check if player has been drawn
+    private HashMap<String, Boolean> playerDrawn; //check if player has been drawn
 
-    HashMap<String, Player> players; //hashmap of players
+    private HashMap<String, Player> players; //hashmap of players
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_field);
-
-        move = (Button) findViewById(R.id.move_players);
 
         winningTeam = (TextView) findViewById(R.id.winner); //initialize winner textview
 
@@ -98,7 +102,7 @@ public class FieldActivity extends ActionBarActivity {
 
         players = new HashMap<>(); //initialize hashmap of players
 
-        playerDrawn = new HashMap<>();
+        playerDrawn = new HashMap<>(); //initialize hashmap to track whether each has been drawn
 
         Intent intent = getIntent(); //get intent
 
@@ -125,49 +129,14 @@ public class FieldActivity extends ActionBarActivity {
         //set on click listeners for buttons
         stats.setOnClickListener(new returnToStatsListener());
         play.setOnClickListener(new playListener());
-        move.setOnClickListener(new movePlayersListener());
         spinnerTeam1.setOnItemSelectedListener(new team1Listener());
         spinnerTeam2.setOnItemSelectedListener(new team2Listener());
         spinnerPlayers1.setOnItemSelectedListener(new player1Listener());
         spinnerPlayers2.setOnItemSelectedListener(new player2Listener());
     }
 
-    public class movePlayersListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(View v) {
-
-            c = playersDraw.getHolder().lockCanvas(); //lock canvas
-
-            Set<String> keys = players.keySet(); //get player keys
-
-            for(String k: keys) {
-
-                //draw players on team 1
-                if ( playerDrawn.get(k).booleanValue() && players.get(k).getTeam1()) {
-                    playersDraw.drawPlayerTeam1(c,
-                            players.get(k).getX()+20,
-                            players.get(k).getY()+20,
-                            k);
-                }
-
-                //draw players on team 2
-                if ( playerDrawn.get(k).booleanValue() && !players.get(k).getTeam1() ) {
-                    playersDraw.drawPlayerTeam2(c,
-                            players.get(k).getX() + 20,
-                            players.get(k).getY() + 20,
-                            k);
-                }
-            }
-
-            playersDraw.getHolder().unlockCanvasAndPost(c); //unlock canvas
-            playersDraw.postInvalidate();
-
-        }
-    }
-
     /*
-     * class: player2Listener
+     * class: player2Listener           Listens for player selected on right and draws on field.
      */
     public class player2Listener implements AdapterView.OnItemSelectedListener {
 
@@ -214,7 +183,7 @@ public class FieldActivity extends ActionBarActivity {
                 players.get(player2).setY(y);
 
                 playerDrawn.put(player2, true); //track players drawn
-                players.get(player2).setTeam1(false);
+                players.get(player2).setTeam1(false); //track that player is on team 2
             }
         }
 
@@ -225,13 +194,14 @@ public class FieldActivity extends ActionBarActivity {
     }
 
     /*
-     * class: player1Listener
+     * class: player1Listener           Listens for when player on left is selected and draws on field.
      */
     public class player1Listener implements AdapterView.OnItemSelectedListener {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             player1 = parent.getItemAtPosition(position).toString(); //get selected player
 
+            //does not redraw if player has already been drawn
             if( !playerDrawn.get(player1).booleanValue()) {
 
                 float x = (float) (Math.random() * (playersDraw.getWidth()-100) ) + 30; //get random x position
@@ -290,7 +260,6 @@ public class FieldActivity extends ActionBarActivity {
             team2 = parent.getItemAtPosition(position).toString(); //get selected team
 
             displayPlayers2(); //display players in team selected on right
-
         }
 
         @Override
@@ -299,6 +268,9 @@ public class FieldActivity extends ActionBarActivity {
         }
     }
 
+    /*
+     * method: displayPlayers2          Displays players in team selected on the right.
+     */
     public void displayPlayers2() {
         player2List = new ArrayList<>(); //new arrayList for players
 
