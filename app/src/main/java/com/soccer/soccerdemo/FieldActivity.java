@@ -1,5 +1,6 @@
 package com.soccer.soccerdemo;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -34,6 +35,7 @@ public class FieldActivity extends ActionBarActivity {
     //buttons to return to the main activity and play the game
     private Button stats;
     private Button play;
+    private Button move;
 
     //selected teams and players
     String team1; //team selected on left
@@ -71,6 +73,8 @@ public class FieldActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_field);
+
+        move = (Button) findViewById(R.id.move_players);
 
         winningTeam = (TextView) findViewById(R.id.winner); //initialize winner textview
 
@@ -121,10 +125,45 @@ public class FieldActivity extends ActionBarActivity {
         //set on click listeners for buttons
         stats.setOnClickListener(new returnToStatsListener());
         play.setOnClickListener(new playListener());
+        move.setOnClickListener(new movePlayersListener());
         spinnerTeam1.setOnItemSelectedListener(new team1Listener());
         spinnerTeam2.setOnItemSelectedListener(new team2Listener());
         spinnerPlayers1.setOnItemSelectedListener(new player1Listener());
         spinnerPlayers2.setOnItemSelectedListener(new player2Listener());
+    }
+
+    public class movePlayersListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+
+            c = playersDraw.getHolder().lockCanvas(); //lock canvas
+
+            Set<String> keys = players.keySet(); //get player keys
+
+            for(String k: keys) {
+
+                //draw players on team 1
+                if ( playerDrawn.get(k).booleanValue() && players.get(k).getTeam1()) {
+                    playersDraw.drawPlayerTeam1(c,
+                            players.get(k).getX()+20,
+                            players.get(k).getY()+20,
+                            k);
+                }
+
+                //draw players on team 2
+                if ( playerDrawn.get(k).booleanValue() && !players.get(k).getTeam1() ) {
+                    playersDraw.drawPlayerTeam2(c,
+                            players.get(k).getX() + 20,
+                            players.get(k).getY() + 20,
+                            k);
+                }
+            }
+
+            playersDraw.getHolder().unlockCanvasAndPost(c); //unlock canvas
+            playersDraw.postInvalidate();
+
+        }
     }
 
     /*
@@ -345,6 +384,11 @@ public class FieldActivity extends ActionBarActivity {
                         }
                     }
                 }
+
+                //switch to winner view
+                Intent intent = new Intent(FieldActivity.this, WinnerActivity.class);
+                intent.putExtra("winner", team1);
+                startActivity(intent);
             }
             else {
                 winningTeam.setText(team2 + " wins!");
@@ -361,6 +405,11 @@ public class FieldActivity extends ActionBarActivity {
                         }
                     }
                 }
+
+                //switch to winner view
+                Intent intent = new Intent(FieldActivity.this, WinnerActivity.class);
+                intent.putExtra("winner", team2);
+                startActivity(intent);
             }
         }
     }

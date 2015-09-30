@@ -127,12 +127,23 @@
                 android:layout_width="40dp"
                 android:layout_height="20px" />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Move Players"
+                android:id="@+id/move_players" />
+
+            <Space
+                android:layout_width="40dp"
+                android:layout_height="20px" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text=""
                 android:id="@+id/winner" />
+
         </LinearLayout>
 
         <LinearLayout

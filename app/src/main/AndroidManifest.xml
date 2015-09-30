@@ -24,6 +24,10 @@
             android:name=".FieldActivity"
             android:label="@string/title_activity_field" >
         </activity>
+        <activity
+            android:name=".WinnerActivity"
+            android:label="@string/title_activity_winner" >
+        </activity>
     </application>
 
 </manifest>
