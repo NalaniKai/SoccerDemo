@@ -24,7 +24,9 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Set;
 
-/*
+/* Programmer: Nalani (Megan Chun)
+ * Last Updated: Sept. 29, 2015
+ *
  * class: FieldActivity         A soccer field is draw and the user can view a list of the teams
  *                              and players in each team. The user can select a player and the
  *                              player will be drawn on the field. The user can also play a game

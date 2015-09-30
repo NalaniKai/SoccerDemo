@@ -22,7 +22,16 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-
+/* Programmer: Nalani (Megan Chun)
+ * Last Updated: Sept. 29, 2015
+ *
+ * class: MainActivity              Allows user to add teams, players, and player stats. This
+ *                                  activity also allows the user to select a team and will show
+ *                                  the players in the team, the player positions in the team, and
+ *                                  the team logo. The user can also go to a screen to move players
+ *                                  to different teams as well as go to a screen to play a soccer
+ *                                  game.
+ */
 public class MainActivity extends ActionBarActivity {
 
     Team currentTeam; //current team
@@ -213,10 +222,14 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    /*
+     * method: onActvityResult          Gets data from activities after changing back to the
+     *                                  MainActivity and updates the data in MainActivity.
+     */
     public void  onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 1) {
+        if(requestCode == 1) { //from PlayerActivity
 
             if(resultCode == 1) {
                 //get updated player hashmap
@@ -225,14 +238,13 @@ public class MainActivity extends ActionBarActivity {
                 displayPositions(); //update player positions if players changed teams
             }
         }
-        else if(requestCode == 2) {
+        else if(requestCode == 2) { //from FieldActivity
 
             if(resultCode == 2) {
                 //update players hashmap
                 players = (HashMap<String, Player>) data.getSerializableExtra("stats updated");
 
-                //update team stats
-                teamStats();
+                teamStats(); //update team stats
             }
         }
     }
