@@ -23,7 +23,8 @@
             <Spinner
                 android:layout_width="144dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner_team1" />
+                android:id="@+id/spinner_team1"
+                android:background="#ff2065ff" />
 
             <Space
                 android:layout_width="25dp"
@@ -95,7 +96,8 @@
             <Spinner
                 android:layout_width="167dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner_team2" />
+                android:id="@+id/spinner_team2"
+                android:background="#ffff3b34" />
 
         </LinearLayout>
 

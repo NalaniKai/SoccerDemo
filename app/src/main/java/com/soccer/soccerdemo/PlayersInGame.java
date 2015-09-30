@@ -24,12 +24,21 @@ public class PlayersInGame extends SurfaceView {
         super.onDraw(c);
     }
 
-    public void drawPlayer(Canvas c, float x, float y, String name) {
+    public void drawPlayerTeam1(Canvas c, float x, float y, String name) {
         Paint blue = new Paint();
         blue.setColor(Color.BLUE);
 
         //draw blue dot representing player
         c.drawCircle(x, y, 20, blue);
-        c.drawText(name, x+40, y, blue);
+        c.drawText(name, x + 40, y, blue);
+    }
+
+    public void drawPlayerTeam2(Canvas c, float x, float y, String name) {
+        Paint red = new Paint();
+        red.setColor(Color.RED);
+
+        //draw blue dot representing player
+        c.drawCircle(x, y, 20, red);
+        c.drawText(name, x+40, y, red);
     }
 }

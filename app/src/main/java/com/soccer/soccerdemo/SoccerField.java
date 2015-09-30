@@ -74,12 +74,4 @@ public class SoccerField extends SurfaceView{
         c.drawRect(rightBox, white);
     }
 
-    /*public void drawPlayer(Canvas c, float x, float y, String name) {
-        Paint blue = new Paint();
-        blue.setColor(Color.BLUE);
-
-        //draw blue dot representing player
-        c.drawCircle(x, y, 20, blue);
-        c.drawText(name, x+40, y, blue);
-    }*/
 }

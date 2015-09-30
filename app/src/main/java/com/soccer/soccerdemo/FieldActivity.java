@@ -141,16 +141,8 @@ public class FieldActivity extends ActionBarActivity {
                 float x = (float) Math.random() * playersDraw.getWidth();
                 float y = (float) Math.random() * playersDraw.getHeight();
 
-                c = playersDraw.getHolder().lockCanvas();
-
-                Paint blue = new Paint();
-                blue.setColor(Color.BLUE);
-
-                //draw blue dot representing player
-                c.drawCircle(x, y, 20, blue);
-                c.drawText(player2, x+40, y, blue);
-
-                //playersDraw.drawPlayer(c, x, y, player2); //draws selected player on board
+                c = playersDraw.getHolder().lockCanvas(); //lock canvas
+                playersDraw.drawPlayerTeam2(c, x, y, player2); //draws selected player on board
                 playersDraw.getHolder().unlockCanvasAndPost(c); //draw
                 playersDraw.postInvalidate();
 
@@ -174,11 +166,11 @@ public class FieldActivity extends ActionBarActivity {
 
             if( !playerDrawn.get(player1).booleanValue()) {
 
-                float x = (float) Math.random() * playersDraw.getWidth();
-                float y = (float) Math.random() * playersDraw.getHeight();
+                float x = (float) Math.random() * playersDraw.getWidth(); //get random x position
+                float y = (float) Math.random() * playersDraw.getHeight(); //get random y position
 
-                c = playersDraw.getHolder().lockCanvas();
-                //playersDraw.drawPlayer(c, x, y, player1); //draws selected player on board
+                c = playersDraw.getHolder().lockCanvas(); //lock canvas
+                playersDraw.drawPlayerTeam1(c, x, y, player1); //draws selected player on board
                 playersDraw.getHolder().unlockCanvasAndPost(c); //draw
                 playersDraw.postInvalidate();
 
