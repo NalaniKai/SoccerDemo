@@ -78,8 +78,8 @@ public class PlayersActivity extends ActionBarActivity {
         //initialize player pictures
         playerPic1 = (ImageView) findViewById(R.id.player_pics1);
         playerPic2 = (ImageView) findViewById(R.id.player_pics2);
-        player1 = (TextView) findViewById(R.id.right_player);
-        player2 = (TextView) findViewById(R.id.left_player);
+        player1 = (TextView) findViewById(R.id.left_player);
+        player2 = (TextView) findViewById(R.id.right_player);
 
         //initialize team spinners
         spinner1Team = (Spinner) findViewById(R.id.spinner_team1);
