@@ -19,7 +19,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-
+/* Programmer: Nalani (Megan Chun)
+ * Last Updated: Sept. 29, 2015
+ *
+ * class: PlayersActivity           User can view the different teams and players on each team.
+ *                                  The user can also move players between teams. Data gets passed
+ *                                  back to MainActivity after finishing.
+ */
 public class PlayersActivity extends ActionBarActivity {
 
     //buttons

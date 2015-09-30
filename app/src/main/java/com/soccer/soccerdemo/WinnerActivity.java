@@ -15,12 +15,19 @@ import android.widget.TextView;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
+/* Programmer: Nalani (Megan Chun)
+ * Last Updated: Sept. 29, 2015
+ *
+ * class: WinnerActivity                    Displays the winner of the game and has moving shapes
+ *                                          when the user taps the screen.
+ */
 public class WinnerActivity extends ActionBarActivity {
 
-    private WinnerCelebration win;
-    private Canvas c;
-    private String team;
+    private WinnerCelebration win; //surface view to draw shapes
+    private Canvas c; //canvas
+    private String team; //team name of winner
+
+    //text views to display winning team
     private TextView name;
     private TextView name2;
     private TextView name3;
@@ -30,9 +37,11 @@ public class WinnerActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_winner);
 
+        //initialize surface view and canvas
         win = (WinnerCelebration) findViewById(R.id.winner_view);
-        c = new Canvas(); //instantiate canvas
+        c = new Canvas();
 
+        //initialize textviews for winner name
         name = (TextView) findViewById(R.id.team_name);
         name2 = (TextView) findViewById(R.id.name1);
         name3 = (TextView) findViewById(R.id.name2);
@@ -41,36 +50,39 @@ public class WinnerActivity extends ActionBarActivity {
         Intent i = getIntent(); //get intent
         team = i.getStringExtra("winner"); //get team that won
 
-        name.setText(team + " won!!!"); //display team name
-        name2.setText(team + " won!!!"); //display team name
-        name3.setText(team + " won!!!"); //display team name
+        //display team name
+        name.setText(team + " won!!!");
+        name2.setText(team + " won!!!");
+        name3.setText(team + " won!!!");
 
         win.setZOrderOnTop(true); //set view on top
         SurfaceHolder holder = win.getHolder(); //create holder
         holder.setFormat(PixelFormat.TRANSPARENT); //make surface view transparent
 
-        win.setOnTouchListener(new touchListener());
-
-
+        win.setOnTouchListener(new touchListener()); //set listener to move shapes upon touch
 
         //set timer for activity
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                finish();
+                finish(); //return to Field Activity
             }
         }, 5000);
     }
 
+    /*
+     * class: touchListener                 Listens for when user touches screen and redraws shapes
+     *                                      in different colors and sizes in different postions.
+     */
     public class touchListener implements View.OnTouchListener{
 
         @Override
         public boolean onTouch(View v, MotionEvent event) {
 
-            c = win.getHolder().lockCanvas(); //lock
-            win.move(c);
-            win.getHolder().unlockCanvasAndPost(c);
+            c = win.getHolder().lockCanvas(); //lock canvas
+            win.move(c); //moves shapes
+            win.getHolder().unlockCanvasAndPost(c); //unlock canvas
             win.postInvalidate();
 
             return false;

@@ -8,8 +8,10 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 
-/**
- * Created by chunm18 on 9/27/2015.
+/* Programmer: Nalani (Megan Chun)
+ * Last Updated: Sept. 29, 2015
+ *
+ * class: SoccerField               Draws a soccer field in the FieldActivity.
  */
 public class SoccerField extends SurfaceView{
     public SoccerField(Context context, AttributeSet attrs) {

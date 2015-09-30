@@ -2,11 +2,14 @@ package com.soccer.soccerdemo;
 
 import java.io.Serializable;
 
-/**
- * Created by chunm18 on 9/26/2015.
+/* Programmer: Nalani (Megan Chun)
+ * Last Updated: Sept. 29, 2015
+ *
+ * class: Player            Holds attributes of a soccer player.
  */
 public class Player implements Serializable {
 
+    //soccer player attributes
     private String name;
     private String position;
     private String team;
@@ -17,6 +20,7 @@ public class Player implements Serializable {
     private float y;
     private boolean team1;
 
+    //create a soccer player
     public Player(String name, String position, String team, int goals, int red, int yellow) {
         this.name = name;
         this.position = position;

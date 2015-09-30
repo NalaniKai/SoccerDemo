@@ -124,17 +124,17 @@ public class MainActivity extends ActionBarActivity {
 
         //create and add team Meow
         teamLogoCurrent.setImageResource(R.mipmap.flower_logo);
-        currentTeam = new Team("Meow", teamLogoCurrent, R.mipmap.flower_logo);
+        currentTeam = new Team(R.mipmap.flower_logo);
         teams.put("Meow", currentTeam);
 
         //create and add team Kittens
         teamLogoCurrent.setImageResource(R.mipmap.emma_logo);
-        currentTeam = new Team("Kittens", teamLogoCurrent, R.mipmap.emma_logo);
+        currentTeam = new Team(R.mipmap.emma_logo);
         teams.put("Kittens", currentTeam);
 
         //create and add team Puppies
         teamLogoCurrent.setImageResource(R.mipmap.koa_logo);
-        currentTeam = new Team("Puppies", teamLogoCurrent, R.mipmap.koa_logo);
+        currentTeam = new Team(R.mipmap.koa_logo);
         teams.put("Puppies", currentTeam);
 
         //set listeners
@@ -349,7 +349,7 @@ public class MainActivity extends ActionBarActivity {
         spinnerAdapter.addAll(teamNames);
         spinnerAdapter.notifyDataSetChanged();
 
-        currentTeam = new Team(teamName, teamLogoCurrent, R.mipmap.thunder_logo); //create new team
+        currentTeam = new Team(R.mipmap.thunder_logo); //create new team
         teams.put(teamName, currentTeam); //add team to hashmap
     }
 
