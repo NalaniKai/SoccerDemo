@@ -46,12 +46,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner_positions" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/team_logo"
-                android:background="@mipmap/koa_logo" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -285,7 +279,7 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <Button
                 android:layout_width="wrap_content"
@@ -302,6 +296,23 @@
                 android:layout_height="wrap_content"
                 android:text="Start Game"
                 android:id="@+id/start_game" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/team_logo"
+                    android:background="@mipmap/koa_logo" />
+            </FrameLayout>
         </LinearLayout>
 
     </LinearLayout>
