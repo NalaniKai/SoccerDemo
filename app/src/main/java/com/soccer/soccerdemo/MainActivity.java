@@ -110,12 +110,27 @@ public class MainActivity extends ActionBarActivity {
         //start with players in hashmap
         currentPlayer = new Player("Lily", "Striker", "Kittens", 8, 0 , 1);
         players.put("Lily", currentPlayer);
+        players.get("Lily").setPicID(R.mipmap.lily);
+
+        //start with players in hashmap
         currentPlayer = new Player("Sam", "Mid-field", "Meow", 12, 1, 2);
         players.put("Sam", currentPlayer);
+        players.get("Sam").setPicID(R.mipmap.sam);
+
+        //start with players in hashmap
         currentPlayer = new Player("Linda", "Defender", "Meow", 1, 1, 1);
         players.put("Linda", currentPlayer);
+        players.get("Linda").setPicID(R.mipmap.linda);
+
+        //start with players in hashmap
         currentPlayer = new Player("Jack", "Defender", "Puppies", 2, 1, 2);
         players.put("Jack", currentPlayer);
+        players.get("Jack").setPicID(R.mipmap.jack);
+
+        //start with players in hashmap
+        currentPlayer = new Player("Jane", "Striker", "Puppies", 3, 0 , 1);
+        players.put("Jane", currentPlayer);
+        players.get("Jane").setPicID(R.mipmap.jane);
 
         //add team names to array list
         teamNames.add("Meow");

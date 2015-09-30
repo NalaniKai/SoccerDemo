@@ -13,7 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +29,12 @@ import java.util.Set;
  *                                  back to MainActivity after finishing.
  */
 public class PlayersActivity extends ActionBarActivity {
+
+    //pictures for players
+    private ImageView playerPic1;
+    private ImageView playerPic2;
+    private TextView player1;
+    private TextView player2;
 
     //buttons
     private Button statsBtn;
@@ -42,30 +50,36 @@ public class PlayersActivity extends ActionBarActivity {
     private Spinner spinnerMemb2;
 
     //players
-    String mem1;
-    String mem2;
+    private String mem1;
+    private String mem2;
 
     //teams
-    String team1;
-    String team2;
+    private String team1;
+    private String team2;
 
-    ArrayAdapter<String> adapterTeam; //adapter for team spinners
-    ArrayList<String> team_list; //holds team names
+    private ArrayAdapter<String> adapterTeam; //adapter for team spinners
+    private ArrayList<String> team_list; //holds team names
 
     //adapters for players
-    ArrayAdapter<String> adapterPlayers1;
-    ArrayAdapter<String> adapterPlayers2;
+    private ArrayAdapter<String> adapterPlayers1;
+    private ArrayAdapter<String> adapterPlayers2;
 
     //ArrayLists for players
-    ArrayList<String> player1List;
-    ArrayList<String> player2List;
+    private ArrayList<String> player1List;
+    private ArrayList<String> player2List;
 
-    HashMap<String, Player> players; //players hashmap
+    private HashMap<String, Player> players; //players hashmap
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_players);
+
+        //initialize player pictures
+        playerPic1 = (ImageView) findViewById(R.id.player_pics1);
+        playerPic2 = (ImageView) findViewById(R.id.player_pics2);
+        player1 = (TextView) findViewById(R.id.right_player);
+        player2 = (TextView) findViewById(R.id.left_player);
 
         //initialize team spinners
         spinner1Team = (Spinner) findViewById(R.id.spinner_team1);
@@ -116,6 +130,10 @@ public class PlayersActivity extends ActionBarActivity {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             mem1 = parent.getItemAtPosition(position).toString(); //selected player
+
+            playerPic1.setImageResource(players.get(mem1).getPicID()); //set player picture
+
+            player1.setText(mem1); //display player name
         }
 
         @Override
@@ -146,6 +164,10 @@ public class PlayersActivity extends ActionBarActivity {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             mem2 = parent.getItemAtPosition(position).toString();
+
+            playerPic2.setImageResource(players.get(mem2).getPicID()); //set player picture
+
+            player2.setText(mem2); //display player name
         }
 
         @Override

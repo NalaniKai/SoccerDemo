@@ -19,6 +19,7 @@ public class Player implements Serializable {
     private float x;
     private float y;
     private boolean team1;
+    private int picID;
 
     //create a soccer player
     public Player(String name, String position, String team, int goals, int red, int yellow) {
@@ -30,6 +31,7 @@ public class Player implements Serializable {
         this.yellow = yellow;
         this.x = 0;
         this.y = 0;
+        picID = 0;
         team1 = false;
     }
 
@@ -46,10 +48,16 @@ public class Player implements Serializable {
     public float getY() { return y; }
     public boolean getTeam1() { return team1; }
 
+    //get player picture ID
+    public int getPicID() { return picID; }
+
     //set player team
     public void setTeamName(String team) { this.team = team; }
     public void setGoals() { ++this.goals; }
     public void setYellowCards() { ++this.yellow; }
+
+    //set picture ID
+    public void setPicID(int id) { this.picID = id; }
 
     //set player position on surface view
     public void setX(float x) { this.x = x; }
